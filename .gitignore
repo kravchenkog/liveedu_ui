@@ -1,0 +1,8 @@
+geckodriver.log
+.pytest_cache/v/cache/nodeids
+.pytest_cache/v/cache/lastfailed
+.pytest_cache/README.md
+.idea/workspace.xml
+.idea/modules.xml
+.idea/misc.xml
+.idea/liveedutv_uitests.iml
