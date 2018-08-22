@@ -38,7 +38,8 @@ class TestClass():
         elts_dct['1sec_button_try'] = self.app.pricing.sec1_button_try_is_presented()
         for x in elts_dct.values():
             assert x is True
-
+    def test(self):
+        pass
 
     def test_WHEN_pricing_screen_EXPECTED_in_1st_section_switcher_in_annual_state_default_TC3420(self):
         assert self.app.pricing.switcher_default_state_is_annual()
