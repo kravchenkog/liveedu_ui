@@ -1,4 +1,11 @@
+
 from selenium import webdriver
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.common.alert import Alert
+from selenium.webdriver.support.ui import WebDriverWait as wait
+from selenium.webdriver.support import expected_conditions as EC
+
+
 from fixture.screens_helper.home_screen_elements_helper import HomeElements
 from fixture.screens_helper.login_helper import LoginHelper
 from fixture.general_helper import GeneralHelper
@@ -21,8 +28,14 @@ class AppManager:
             self.profile = webdriver.FirefoxProfile()
             self.profile.set_preference('network.http.phishy-userpass-length', 255)
             self.driver = webdriver.Firefox()
-            self.driver.get("https://livecodingtv:csEAMHPfoetWUyY3hxwNPXuM@dev.liveedu.tv/")
+            # self.driver.get("https://livecodingtv:csEAMHPfoetWUyY3hxwNPXuM@dev.liveedu.tv/")
+
+
             self.driver.get("https://dev.liveedu.tv/")
+            wait(self.driver, 5).until(EC.alert_is_present())
+            alert = self.driver.switch_to.alert
+            alert.send_keys('livecodingtv' + Keys.TAB + 'csEAMHPfoetWUyY3hxwNPXuM')
+            alert.accept()
 
         else:
             print('incorrect browser')
