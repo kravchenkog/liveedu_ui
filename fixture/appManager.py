@@ -20,11 +20,12 @@ from fixture.api_helpers.route_helper import Route
 from fixture.api_helpers.api_user_helper import APIHelper
 from fixture.screens_helper.live_screen_helper import LiveScreenHelper
 from fixture.screens_helper.verify_email_screen_helper import VerifyEmailHelper
-from fixture.screens_helper.select_topics_screen_helper import SelectTopicsHelper
-
+from fixture.screens_helper.select_topics_to_learn_helper import SelectTopicstoLearnHelper
+from fixture.api_helpers.api_environment_helper import Environment
 
 class AppManager:
     def __init__(self, browser):
+        self.env = Environment(1)  # dev
         if browser == 'firefox':
 
             self.profile = webdriver.FirefoxProfile()
@@ -33,11 +34,12 @@ class AppManager:
             # self.driver.get("https://livecodingtv:csEAMHPfoetWUyY3hxwNPXuM@dev.liveedu.tv/")
 
 
-            self.driver.get("https://dev.liveedu.tv/")
+            self.driver.get(self.env.base_url)
             wait(self.driver, 5).until(EC.alert_is_present())
             alert = self.driver.switch_to.alert
             alert.send_keys('livecodingtv' + Keys.TAB + 'csEAMHPfoetWUyY3hxwNPXuM')
             alert.accept()
+
 
         else:
             print('incorrect browser')
@@ -58,7 +60,8 @@ class AppManager:
         self.api = APIHelper()
         self.live = LiveScreenHelper(self)
         self.verify_email = VerifyEmailHelper(self)
-        self.select_topic = SelectTopicsHelper(self)
+        self.select_topic_learn = SelectTopicstoLearnHelper(self)
+
 
 
 

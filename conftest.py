@@ -40,6 +40,7 @@ def app_live(request):
 def smart_start_and_go_to_sign_up(fixture):
 
     if fixture.signup.screen_signup_is_presented() is not True:
+        fixture.home_el.go_to_home_screen_and_wait()
         fixture.signup.button_signup_press_and_wait()
     else:
         fixture.signup.fields_clear()

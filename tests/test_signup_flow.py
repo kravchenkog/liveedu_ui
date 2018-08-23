@@ -126,15 +126,15 @@ class TestClass():
             assert x is True
 
 
-    def test_WHEN_want_create_button_press_EXPECTED_add_contact_info_screen_TC2510(self):
+    def test_WHEN_want_create_button_press_EXPECTED_add_contact_info_screen_TC2520(self):
         self.app.chose_role.go_to_choose_role_screen()
         self.app.chose_role.button_create_project_tap()
         assert self.app.cont_inf.screen_add_contact_inf_is_presented()
 
-    def test_WHEN_want_learn_button_press_EXPECTED_add_contact_info_screen_TC2520(self):
+    def test_WHEN_want_learn_button_press_EXPECTED_add_contact_info_screen_TC2510(self):
         self.app.chose_role.go_to_choose_role_screen()
         self.app.chose_role.button_study_tap()
-        assert self.app.select_topic.screen_select_topic_is_presented()
+        assert self.app.select_topic_learn.screen_select_topic_is_presented()
 
     def test_WHEN_add_contacts_screen_EXPECTED_elements_are_correct_TC2600(self):
         self.app.cont_inf.go_to_add_contact_inf_screen()
@@ -147,13 +147,16 @@ class TestClass():
 
         for x in elts_dct.values():
             assert x is True
-
-    def test_WHEN_skype_is_entered_EXPECTED_create_project_screen_presented_TC2610(self):
-        self.app.cont_inf.go_to_add_contact_inf_screen()
-        skype = self.app.string.get_random_username()
-        self.app.cont_inf.field_skype_send_key(skype)
-        self.app.cont_inf.button_next_tap()
-        assert self.app.select_topic.screen_select_topic_is_presented()
+    #
+    # def test_WHEN_skype_is_entered_EXPECTED_create_project_screen_presented_TC2610(self):
+    #     user_data = self.app.cont_inf.go_to_add_contact_inf_screen()
+    #     skype = self.app.string.get_random_username()
+    #     self.app.cont_inf.field_skype_send_key(skype)
+    #     data_confirm = {'email': user_data['email'], 'key': '992927E5B1C8A237875C70A302A34E22'}
+    #     self.app.api.general_post(app=self.app, route=self.app.route.email_confirmation,
+    #                               data=data_confirm)
+    #     self.app.cont_inf.button_next_tap()
+    #     assert self.app.select_topic.screen_select_topic_is_presented()
 
 
 

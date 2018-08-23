@@ -17,6 +17,9 @@ class SignUpHelper():
         element = wait.until(EC.presence_of_element_located(
             (By.CSS_SELECTOR, "input[name='passwordConfirm']")))
 
+        element = wait.until(EC.presence_of_element_located(
+            (By.CSS_SELECTOR, "div._27wqJ")))
+
     def screen_signup_is_presented(self):
         elements = self.driver.find_elements_by_css_selector('input[name="passwordConfirm"]')
         if len(elements) > 0:
@@ -130,10 +133,13 @@ class SignUpHelper():
         self.field_confirm_password_clear()
 
     def signup_fillall_press_done_wait_username(self):
-        self.field_email_send_keys(self.app.string.get_random_email())
-        passwords = self.app.string.get_random_two_passwords()
-        self.field_password_send_keys(passwords[0])
-        self.field_confirm_password_send_keys(passwords[1])
+        user_data = {}
+        user_data['email'] = self.app.string.get_random_email()
+        self.field_email_send_keys(user_data['email'])
+        user_data['passwords'] = self.app.string.get_random_two_passwords()
+        self.field_password_send_keys(user_data['passwords'][0])
+        self.field_confirm_password_send_keys(user_data['passwords'][1])
         self.button_start_learning_press()
         self.app.username.screen_username_wait_presenting()
+        return user_data
 
