@@ -110,7 +110,7 @@ class TestClass():
         sleep(1)
         assert self.app.chose_role.screen_choseyourrole_is_presented() is not True
 
-    def test_WHEN_choserole_screen_is_presentede_EXPECTED_elements_are_correct_TC2700(self):
+    def test_WHEN_choserole_screen_is_presentede_EXPECTED_elements_are_correct_TC2500(self):
         self.app.signup.signup_fillall_press_done_wait_username()
         self.app.username.field_username_send_keys(self.app.string.get_random_username())
         self.app.username.button_next_click()
@@ -124,3 +124,36 @@ class TestClass():
         elts_dct['lower_title'] = self.app.chose_role.title_lower_is_presented()
         for x in elts_dct.values():
             assert x is True
+
+
+    def test_WHEN_want_create_button_press_EXPECTED_add_contact_info_screen_TC2510(self):
+        self.app.chose_role.go_to_choose_role_screen()
+        self.app.chose_role.button_create_project_tap()
+        assert self.app.cont_inf.screen_add_contact_inf_is_presented()
+
+    def test_WHEN_want_learn_button_press_EXPECTED_add_contact_info_screen_TC2520(self):
+        self.app.chose_role.go_to_choose_role_screen()
+        self.app.chose_role.button_study_tap()
+        assert self.app.select_topic.screen_select_topic_is_presented()
+
+    def test_WHEN_add_contacts_screen_EXPECTED_elements_are_correct_TC2600(self):
+        self.app.cont_inf.go_to_add_contact_inf_screen()
+        elts_dct = {}
+        elts_dct['top_title'] = self.app.cont_inf.title_top_is_presented()
+        elts_dct['below_top_title'] = self.app.cont_inf.title_below_top_is_presented()
+        elts_dct['skype'] = self.app.cont_inf.field_skype_is_presented()
+        elts_dct['hangouts'] = self.app.cont_inf.field_google_hang_is_presented()
+        elts_dct['next'] = self.app.cont_inf.button_next_is_presented()
+
+        for x in elts_dct.values():
+            assert x is True
+
+    def test_WHEN_skype_is_entered_EXPECTED_create_project_screen_presented_TC2610(self):
+        self.app.cont_inf.go_to_add_contact_inf_screen()
+        skype = self.app.string.get_random_username()
+        self.app.cont_inf.field_skype_send_key(skype)
+        self.app.cont_inf.button_next_tap()
+        assert self.app.select_topic.screen_select_topic_is_presented()
+
+
+

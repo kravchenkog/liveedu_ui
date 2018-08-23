@@ -19,6 +19,8 @@ from fixture.property_user_factory import UserData
 from fixture.api_helpers.route_helper import Route
 from fixture.api_helpers.api_user_helper import APIHelper
 from fixture.screens_helper.live_screen_helper import LiveScreenHelper
+from fixture.screens_helper.verify_email_screen_helper import VerifyEmailHelper
+from fixture.screens_helper.select_topics_screen_helper import SelectTopicsHelper
 
 
 class AppManager:
@@ -55,6 +57,9 @@ class AppManager:
         self.route = Route()
         self.api = APIHelper()
         self.live = LiveScreenHelper(self)
+        self.verify_email = VerifyEmailHelper(self)
+        self.select_topic = SelectTopicsHelper(self)
+
 
 
 
