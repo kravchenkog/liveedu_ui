@@ -40,15 +40,17 @@ class AddYouContactsInformationHelper():
         return self.app.general.element_is_displayed(
             self.app.driver.find_element_by_css_selector(self.button_next_css))
 
-    def go_to_add_contact_inf_screen(self):
-        user_data = self.app.signup.signup_fillall_press_done_wait_username()
-        self.app.username.field_username_send_keys(self.app.string.get_random_username())
+    def go_to_add_contact_inf_screen(self, user):
+        self.app.signup.signup_fillall_press_done_wait_username(user)
+        if user.username == None:
+            user.username = self.app.string.get_random_username()
+        self.app.username.field_username_send_keys(user)
         self.app.username.button_next_click()
         self.app.chose_role.button_create_project_tap()
-        return user_data
 
-    def field_skype_send_key(self, skype):
-        self.driver.find_element_by_css_selector(self.skype_css).send_keys(skype)
+
+    def field_skype_send_key(self, user):
+        self.driver.find_element_by_css_selector(self.skype_css).send_keys(user.skype)
 
     def button_next_tap(self):
         self.driver.find_element_by_css_selector(self.button_next_css).click()

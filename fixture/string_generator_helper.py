@@ -99,3 +99,9 @@ class StringGeneratoHelper:
         username = ''.join(random.choice(string.ascii_lowercase) for i in range(random.randint(30, 60)))
 
         return username
+
+    def get_random_userdata(self, user):
+        user.password1, user.password2 = self.get_random_two_passwords()
+        user.email = self.get_random_email()
+        user.skype = self.get_random_username()
+        user.username = self.get_random_username()

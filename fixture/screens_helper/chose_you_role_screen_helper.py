@@ -40,8 +40,8 @@ class ChoseYourRoleHelper():
     def button_study_tap(self):
             self.driver.find_element_by_css_selector(self.study_button_css).click()
 
-    def go_to_choose_role_screen(self):
-        self.app.signup.signup_fillall_press_done_wait_username()
-        username = self.app.string.get_random_username()
-        self.app.username.field_username_send_keys(username)
+    def go_to_choose_role_screen(self, user):
+        self.app.signup.signup_fillall_press_done_wait_username(user)
+        user.username = self.app.string.get_random_username()
+        self.app.username.field_username_send_keys(user)
         self.app.username.button_next_click()

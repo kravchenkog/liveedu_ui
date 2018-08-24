@@ -44,5 +44,5 @@ class UsernameHelper():
     def button_next_click(self):
         self.app.driver.find_element_by_css_selector(self.button_next).click()
 
-    def field_username_send_keys(self, value):
-        self.app.driver.find_element_by_css_selector(self.field_username).send_keys(value)
+    def field_username_send_keys(self, user):
+        self.app.driver.find_element_by_css_selector(self.field_username).send_keys(user.username)

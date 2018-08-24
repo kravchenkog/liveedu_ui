@@ -22,6 +22,7 @@ from fixture.screens_helper.live_screen_helper import LiveScreenHelper
 from fixture.screens_helper.verify_email_screen_helper import VerifyEmailHelper
 from fixture.screens_helper.select_topics_to_learn_helper import SelectTopicstoLearnHelper
 from fixture.api_helpers.api_environment_helper import Environment
+from fixture.user_data import UserData
 
 class AppManager:
     def __init__(self, browser):
@@ -55,13 +56,13 @@ class AppManager:
         self.chose_role = ChoseYourRoleHelper(self)
         self.cont_inf = AddYouContactsInformationHelper(self)
         self.pricing = PricingHelper(self)
-        self.user_data = UserData()
+        self.user = UserData()
         self.route = Route()
         self.api = APIHelper()
         self.live = LiveScreenHelper(self)
         self.verify_email = VerifyEmailHelper(self)
         self.select_topic_learn = SelectTopicstoLearnHelper(self)
-
+        self.user = UserData()
 
 
 

@@ -104,22 +104,22 @@ class SignUpHelper():
         return self.app.general.element_is_displayed(self.driver.find_element_by_css_selector
                                                  ('button[class="_2WGwi"]'))
 
-    def field_email_send_keys(self, email):
+    def field_email_send_keys(self, user):
         field = self.driver.find_element_by_css_selector("input[name='email']")
-        field.send_keys(email)
+        field.send_keys(user.email)
 
     def field_email_clear(self):
         field = self.driver.find_element_by_css_selector("input[name='email']")
         field.clear()
 
-    def field_password_send_keys(self, password):
-        self.driver.find_element_by_css_selector("input[name='password']").send_keys(password)
+    def field_password_send_keys(self, user):
+        self.driver.find_element_by_css_selector("input[name='password']").send_keys(user.password1)
 
     def field_password_clear(self):
         self.driver.find_element_by_css_selector("input[name='password']").clear()
 
-    def field_confirm_password_send_keys(self, confirm_pass):
-        self.driver.find_element_by_css_selector("input[name='passwordConfirm']").send_keys(confirm_pass)
+    def field_confirm_password_send_keys(self, user):
+        self.driver.find_element_by_css_selector("input[name='passwordConfirm']").send_keys(user.password2)
 
     def field_confirm_password_clear(self):
         self.driver.find_element_by_css_selector("input[name='passwordConfirm']").clear()
@@ -132,14 +132,19 @@ class SignUpHelper():
         self.field_password_clear()
         self.field_confirm_password_clear()
 
-    def signup_fillall_press_done_wait_username(self):
-        user_data = {}
-        user_data['email'] = self.app.string.get_random_email()
-        self.field_email_send_keys(user_data['email'])
-        user_data['passwords'] = self.app.string.get_random_two_passwords()
-        self.field_password_send_keys(user_data['passwords'][0])
-        self.field_confirm_password_send_keys(user_data['passwords'][1])
+    def signup_fillall_press_done_wait_username(self, user):
+        if user.email == None or user.password1 == None:
+            user.email = self.app.string.get_random_email()
+            user.password1, user.password2 = self.app.string.get_random_two_passwords()
+        self.field_email_send_keys(user)
+        self.field_password_send_keys(user)
+        self.field_confirm_password_send_keys(user)
         self.button_start_learning_press()
         self.app.username.screen_username_wait_presenting()
-        return user_data
+
+    def complete_registration(self, user):
+        self.app.cont_inf.go_to_add_contact_inf_screen(user)
+        self.app.cont_inf.field_skype_send_key(user)
+        self.app.cont_inf.button_next_tap()
+
 

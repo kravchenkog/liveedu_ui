@@ -20,6 +20,14 @@ def app_signup(request):
     smart_start_and_go_to_sign_up(fixture)
     return fixture
 
+@pytest.fixture(scope='function')
+def app_login(request):
+    global fixture
+    if fixture is None:
+        fixture = AppManager(browser=browser)
+    smart_start_and_go_to_login(fixture)
+    return fixture
+
 
 @pytest.fixture(scope='function')
 def app_pricing(request):
@@ -45,6 +53,12 @@ def smart_start_and_go_to_sign_up(fixture):
     else:
         fixture.signup.fields_clear()
 
+def smart_start_and_go_to_login(fixture):
+    if not fixture.login.screen_login_is_presented():
+        fixture.home_el.go_to_home_screen_and_wait()
+        fixture.login.button_login_press_and_wait()
+    else:
+        fixture.login.fields_clear()
 
 def smart_start_and_go_to_pricing(fixture):
     if fixture.pricing.screen_pricing_is_presented() is not True:

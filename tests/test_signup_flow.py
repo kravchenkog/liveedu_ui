@@ -7,6 +7,7 @@ class TestClass():
     def _request_signup_page(self, app_signup):
         self.app = app_signup
 
+
     def test_WHEN_signup_screen_open_EXPECTED_4general_sections_are_presented_TC2000(self):
         elts_dct = {}
         elts_dct['topsection'] = self.app.signup.section_top_is_presented()
@@ -33,6 +34,7 @@ class TestClass():
 
     def test_WHEN_signup_open_EXPECTED_10elements_in_email_are_presented_TC2200(self):
         elts_dct = {}
+
         elts_dct['title_email'] = self.app.signup.title_email_is_presented()
         elts_dct['email_field'] = self.app.signup.field_email_is_presented()
         elts_dct['password'] = self.app.signup.field_password_is_presented()
@@ -42,49 +44,54 @@ class TestClass():
             assert x is True
 
     def test_WHEN_email_pass_confpass_entered_EXPECTED_username_screen_is_presented_TC2210(self):
-        self.app.signup.field_email_send_keys(self.app.string.get_random_email())
-        passwords = self.app.string.get_random_two_passwords()
-        self.app.signup.field_password_send_keys(passwords[0])
-        self.app.signup.field_confirm_password_send_keys(passwords[1])
+        self.app.user.email = self.app.string.get_random_email()
+        self.app.signup.field_email_send_keys(self.app.user)
+        self.app.user.password1, self.app.user.password2 = self.app.string.get_random_two_passwords()
+        self.app.signup.field_password_send_keys(self.app.user)
+        self.app.signup.field_confirm_password_send_keys(self.app.user)
         self.app.signup.button_start_learning_press()
         sleep(1)
         assert self.app.username.screen_username_is_presented()
 
     def test_WHEN_email_is_incorrect_AND_press_startlearn_button_EXPECTED_username_screen_is_not_presented_TC2220(self):
-        self.app.signup.field_email_send_keys(self.app.string.get_random_incorrect_email_type1())
-        passwords = self.app.string.get_random_two_passwords()
-        self.app.signup.field_password_send_keys(passwords[0])
-        self.app.signup.field_confirm_password_send_keys(passwords[1])
+        self.app.user.email = self.app.string.get_random_incorrect_email_type1()
+        self.app.signup.field_email_send_keys(user=self.app.user)
+        self.app.user.password1, self.app.user.password2 = self.app.string.get_random_two_passwords()
+        self.app.signup.field_password_send_keys(self.app.user)
+        self.app.signup.field_confirm_password_send_keys(self.app.user)
         self.app.signup.button_start_learning_press()
         assert self.app.username.screen_username_is_presented() is not True
 
 
     def test_WHEN_passwords_are_not_the_same_AND_press_start_EXPECTED_username_screen_is_not_presented_TC2240(self):
-        self.app.signup.field_email_send_keys(self.app.string.get_random_email())
-        passwords = self.app.string.get_random_two_passwords_not_the_same()
-        self.app.signup.field_password_send_keys(passwords[0])
-        self.app.signup.field_confirm_password_send_keys(passwords[1])
+        self.app.user.email = self.app.string.get_random_email()
+        self.app.signup.field_email_send_keys(user=self.app.user)
+        self.app.user.password1, self.app.user.password2 = self.app.string.get_random_two_passwords_not_the_same()
+        self.app.signup.field_password_send_keys(self.app.user)
+        self.app.signup.field_confirm_password_send_keys(self.app.user)
         self.app.signup.button_start_learning_press()
         assert self.app.username.screen_username_is_presented() is not True
 
     def test_WHEN_password_incorrect_AND_press_start_EXPECTED_username_screen_is_not_presented_TC2250(self):
-        self.app.signup.field_email_send_keys(self.app.string.get_random_email())
-        passwords = self.app.string.get_random_two_passwords_numeric()
-        self.app.signup.field_password_send_keys(passwords[0])
-        self.app.signup.field_confirm_password_send_keys(passwords[1])
+        self.app.user.email = self.app.string.get_random_email()
+        self.app.signup.field_email_send_keys(self.app.user)
+        self.app.user.password1, self.app.user.password2 = self.app.string.get_random_two_passwords_numeric()
+        self.app.signup.field_password_send_keys(user=self.app.user)
+        self.app.signup.field_confirm_password_send_keys(user=self.app.user)
         self.app.signup.button_start_learning_press()
         assert self.app.username.screen_username_is_presented() is not True
 
     def test_WHEN_email_is_registered_AND_press_start_EXPECTED_username_screen_is_not_presented_TC2230(self):
-        self.app.signup.field_email_send_keys("artem.merkulov@gmail.com")
-        passwords = self.app.string.get_random_two_passwords()
-        self.app.signup.field_password_send_keys(passwords[0])
-        self.app.signup.field_confirm_password_send_keys(passwords[1])
+        self.app.user.email = "artem.merkulov@gmail.com"
+        self.app.signup.field_email_send_keys(self.app.user)
+        self.app.user.password1, self.app.user.password2 = self.app.string.get_random_two_passwords()
+        self.app.signup.field_password_send_keys(self.app.user)
+        self.app.signup.field_confirm_password_send_keys(self.app.user)
         self.app.signup.button_start_learning_press()
         assert self.app.username.screen_username_is_presented() is not True
 
     def test_WHEN_username_sc_open_EXPECTED_4elements_are_presented_TC2300(self):
-        self.app.signup.signup_fillall_press_done_wait_username()
+        self.app.signup.signup_fillall_press_done_wait_username(self.app.user)
         elts_dct = {}
         elts_dct['top_title'] = self.app.username.title_top_is_presented()
         elts_dct['lower_title'] = self.app.username.title_lower_is_presented()
@@ -94,25 +101,26 @@ class TestClass():
             assert x is True
 
     def test_WHEN_username_is_correct_AND_tap_next_EXPECTED_choseyourrole_is_presented_TC2310(self):
-        self.app.signup.signup_fillall_press_done_wait_username()
-        correct_username = self.app.string.get_random_username()
-        self.app.username.field_username_send_keys(correct_username)
+        self.app.signup.signup_fillall_press_done_wait_username(self.app.user)
+        self.app.user.username = self.app.string.get_random_username()
+        self.app.username.field_username_send_keys(self.app.user)
         self.app.username.button_next_click()
         sleep(1)
         assert self.app.chose_role.screen_choseyourrole_is_presented()
 
     def test_WHEN_username_is_incorrect_AND_tap_next_EXPECTED_choseyourrole_is_not_presented_TC2310(self):
-        self.app.signup.signup_fillall_press_done_wait_username()
-        incorrect_username = self.app.string.get_random_username_short()
+        self.app.signup.signup_fillall_press_done_wait_username(self.app.user)
+        self.app.user.username = self.app.string.get_random_username_short()
 
-        self.app.username.field_username_send_keys(incorrect_username)
+        self.app.username.field_username_send_keys(self.app.user)
         self.app.username.button_next_click()
         sleep(1)
         assert self.app.chose_role.screen_choseyourrole_is_presented() is not True
 
     def test_WHEN_choserole_screen_is_presentede_EXPECTED_elements_are_correct_TC2500(self):
-        self.app.signup.signup_fillall_press_done_wait_username()
-        self.app.username.field_username_send_keys(self.app.string.get_random_username())
+        self.app.signup.signup_fillall_press_done_wait_username(self.app.user)
+        self.app.user.username = self.app.string.get_random_username()
+        self.app.username.field_username_send_keys(self.app.user)
         self.app.username.button_next_click()
 
         elts_dct = {}
@@ -127,17 +135,18 @@ class TestClass():
 
 
     def test_WHEN_want_create_button_press_EXPECTED_add_contact_info_screen_TC2520(self):
-        self.app.chose_role.go_to_choose_role_screen()
+
+        self.app.chose_role.go_to_choose_role_screen(self.app.user)
         self.app.chose_role.button_create_project_tap()
         assert self.app.cont_inf.screen_add_contact_inf_is_presented()
 
     def test_WHEN_want_learn_button_press_EXPECTED_add_contact_info_screen_TC2510(self):
-        self.app.chose_role.go_to_choose_role_screen()
+        self.app.chose_role.go_to_choose_role_screen(self.app.user)
         self.app.chose_role.button_study_tap()
         assert self.app.select_topic_learn.screen_select_topic_is_presented()
 
     def test_WHEN_add_contacts_screen_EXPECTED_elements_are_correct_TC2600(self):
-        self.app.cont_inf.go_to_add_contact_inf_screen()
+        self.app.cont_inf.go_to_add_contact_inf_screen(self.app.user)
         elts_dct = {}
         elts_dct['top_title'] = self.app.cont_inf.title_top_is_presented()
         elts_dct['below_top_title'] = self.app.cont_inf.title_below_top_is_presented()
