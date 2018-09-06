@@ -1,4 +1,4 @@
-
+from time import sleep
 
 class GeneralHelper():
 
@@ -23,6 +23,11 @@ class GeneralHelper():
             return True
         else:
             return False
+
+    def logout_perform(self):
+        self.driver.find_element_by_css_selector('button._1pGNL').click()
+        self.driver.find_element_by_css_selector('button._1ko70').click()
+        sleep(0.5)
 
 
 

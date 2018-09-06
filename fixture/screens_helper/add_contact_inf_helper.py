@@ -42,8 +42,8 @@ class AddYouContactsInformationHelper():
 
     def go_to_add_contact_inf_screen(self, user):
         self.app.signup.signup_fillall_press_done_wait_username(user)
-        if user.username == None:
-            user.username = self.app.string.get_random_username()
+        # if user.username == None:
+        #     user.username = self.app.string.get_random_username()
         self.app.username.field_username_send_keys(user)
         self.app.username.button_next_click()
         self.app.chose_role.button_create_project_tap()

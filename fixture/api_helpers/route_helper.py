@@ -9,4 +9,5 @@ class Route:
         self.topics = '/api/v3/topics/'
         self.email_confirmation = '/api/v3/auth/registration/verify-email/'
         self.login = '/api/v3/auth/login/'
+        self.categories = '/api/v3/categories/'
 

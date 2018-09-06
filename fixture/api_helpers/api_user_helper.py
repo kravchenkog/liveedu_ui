@@ -59,26 +59,31 @@ class APIHelper:
             list_of_all.remove(x)
         return list_slugs
 
-    def get_registered_user(self, app):
-        app.user_data.password1, app.user_data.password2 = app.string_generator.get_random_two_passwords()
-        app.user_data.email = app.string_generator.get_random_email()
-        app.user_data.username = app.string_generator.get_random_username()
-        app.user_data.userrole = 'streamer'
-        app.user_data.slug = app.api_helper.get_random_list_of_slugs(app)
-        data = {'email': app.user_data.email,
-                'password1': app.user_data.password1,
-                'password2': app.user_data.password2,
-                'username': app.user_data.username,
-                'user_role': app.user_data.userrole,
-                'want_learn': app.user_data.slug,
+    def get_registered_user(self, app, user, role):
+        user.password1, user.password2 = app.string.get_random_two_passwords()
+        user.email = app.string.get_random_email()
+        user.username = app.string.get_random_username()
+        user.userrole = role
+        user.slug = self.get_random_list_of_slugs(app)
+        data = {'email': user.email,
+                'password1': user.password1,
+                'password2': user.password2,
+                'username': user.username,
+                'user_role': user.userrole,
+                'want_learn': user.slug,
                 'skype': '123',
                 'hangouts': 'sdfsdf'}
-        response_reg = app.api_helper.general_post(app=app, route=app.route.register, data=data)
-        return app.user_data
+        response_reg = self.general_post(app=app, route=app.route.register, data=data)
+        return user
 
-    def email_confirmation(self, app):
-        data_confirm = {'email': app.user_data.email, 'key': '992927E5B1C8A237875C70A302A34E22'}
+    def email_confirmation(self, app, user):
+        data_confirm = {'email': user.email, 'key': '992927E5B1C8A237875C70A302A34E22'}
         return self.general_post(app=app, route=app.route.email_confirmation, data=data_confirm)
+
+    def get_confirmed_user(self, app, user, role='streamer'):
+        user = self.get_registered_user(app, user, role)
+        self.email_confirmation(app, user)
+        return user
 
     def login_perform(self, app):
         response_login = self.general_post(

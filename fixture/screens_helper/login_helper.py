@@ -12,6 +12,9 @@ class LoginHelper():
         self.email_css = "input[name='username']"
         self.password = "input[name='password']"
         self.login_top_title_css = 'h2.ygWV5'
+        self.button_enter_css = "button[class='_2XfOr']"
+        self.error_message_css = 'p._5jWkD'
+        self.forgot_password_css = "a[class='_2Cz26']"
 
     def button_login_press_and_wait(self):
         self.driver.find_element_by_css_selector('a[href="/login"]').click()
@@ -94,12 +97,12 @@ class LoginHelper():
 
     def field_email_is_presented(self):
         return self.app.general.element_is_displayed(self.driver.find_element_by_css_selector
-                                                     ("input[name='username']"))
+                                                     (self.email_css))
     def field_password_is_presented(self):
         return self.app.general.element_is_displayed(self.driver.find_element_by_css_selector
-                                                     ("input[name='password']"))
+                                                     (self.password))
     def button_enter_is_presented(self):
-        element = self.driver.find_element_by_css_selector("button[class='_2XfOr']")
+        element = self.driver.find_element_by_css_selector(self.button_enter_css)
         if self.app.general.element_is_displayed(element):
             if element.text == 'Enter':
                 return True
@@ -107,12 +110,47 @@ class LoginHelper():
             return False
 
     def button_forgot_password_is_presented(self):
-        element = self.driver.find_element_by_css_selector("a[class='_2Cz26']")
+        element = self.driver.find_element_by_css_selector(self.forgot_password_css)
         if self.app.general.element_is_displayed(element):
             if element.text == 'Forgot Password?':
                 return True
         else:
             return False
+
+    def field_password_send_key(self, value):
+        self.driver.find_element_by_css_selector(self.password).send_keys(value)
+
+
+    def button_enter_press(self):
+        self.driver.find_element_by_css_selector(self.button_enter_css).click()
+
+    def field_email_send_key(self, value):
+        self.driver.find_element_by_css_selector(self.email_css).send_keys(value)
+
+    def register_new_user_and_go_to_login_screen(self, app):
+        self.app.string.get_random_userdata(self.app.user)
+        self.app.home_el.logout_go_home_and_wait()
+        self.app.signup.button_signup_press_and_wait()
+        self.app.signup.complete_registration(self.app.user)
+        self.app.api.email_confirmation(app=self.app, user=self.app.user)
+        self.app.home_el.logout_go_home_and_wait()
+        self.button_login_press_and_wait()
+
+    def user_is_logged_in(self):
+        if len(self.app.driver.find_elements_by_css_selector('button._1pGNL')) > 0:
+            return self.app.general.element_is_displayed(
+                    self.app.driver.find_element_by_css_selector('button._1pGNL'))
+        else: return False
+
+    def error_message_appears(self, error_message):
+        el = self.driver.find_element_by_css_selector(self.error_message_css)
+        if el.text == error_message:
+            return True
+        else:
+            return False
+
+    def button_forgot_password_press(self):
+        self.driver.find_element_by_css_selector(self.forgot_password_css).click()
 
 
 

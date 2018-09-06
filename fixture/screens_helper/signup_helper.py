@@ -133,9 +133,9 @@ class SignUpHelper():
         self.field_confirm_password_clear()
 
     def signup_fillall_press_done_wait_username(self, user):
-        if user.email == None or user.password1 == None:
-            user.email = self.app.string.get_random_email()
-            user.password1, user.password2 = self.app.string.get_random_two_passwords()
+        # if user.email == None or user.password1 == None:
+        #     user.email = self.app.string.get_random_email()
+        #     user.password1, user.password2 = self.app.string.get_random_two_passwords()
         self.field_email_send_keys(user)
         self.field_password_send_keys(user)
         self.field_confirm_password_send_keys(user)

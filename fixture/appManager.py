@@ -22,7 +22,9 @@ from fixture.screens_helper.live_screen_helper import LiveScreenHelper
 from fixture.screens_helper.verify_email_screen_helper import VerifyEmailHelper
 from fixture.screens_helper.select_topics_to_learn_helper import SelectTopicstoLearnHelper
 from fixture.api_helpers.api_environment_helper import Environment
-from fixture.user_data import UserData
+from fixture.screens_helper.reset_password_screen_helper import ResetPasswordHelper
+from fixture.user_data import *
+from fixture.screens_helper.project_request_helper import ProjectRequestHelper
 
 class AppManager:
     def __init__(self, browser):
@@ -45,6 +47,10 @@ class AppManager:
         else:
             print('incorrect browser')
 
+        self.user = UserData()
+        self.user_student = TestStudentUserData()
+        self.user_creator = TestCreatorUserData()
+
         self.driver.set_window_size(1024, 768)
         self.driver.implicitly_wait(0.5)
         self.home_el = HomeElements(self)
@@ -62,7 +68,8 @@ class AppManager:
         self.live = LiveScreenHelper(self)
         self.verify_email = VerifyEmailHelper(self)
         self.select_topic_learn = SelectTopicstoLearnHelper(self)
-        self.user = UserData()
+        self.reset_pass = ResetPasswordHelper(self)
+        self.request_project = ProjectRequestHelper(self)
 
 
 

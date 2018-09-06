@@ -24,12 +24,13 @@ class HomeElements():
             return False
     def button_learnlive_click(self):
         self.driver.find_element_by_css_selector(self.button_learn_live).click()
-    def go_to_home_screen_and_wait(self):
-
+    def logout_go_home_and_wait(self):
+        if self.app.login.user_is_logged_in():
+            self.app.general.logout_perform()
         self.driver.get("https://dev.liveedu.tv/")
 
         element = WebDriverWait(self.driver, 5).until(
-            EC.presence_of_element_located((By.CSS_SELECTOR, "a[href='/login']"))
+            EC.presence_of_element_located((By.CSS_SELECTOR, "a[class='_2NV3A _38w0o']"))
         )
     def logo_is_presented(self):
         return self.app.general.element_is_displayed(self.driver.find_element_by_css_selector

@@ -1,5 +1,5 @@
 import pytest
-
+from time import sleep
 
 class TestClass():
     @pytest.fixture(autouse=True)
@@ -40,9 +40,37 @@ class TestClass():
         elts_dct['forgot_passwprd'] = self.app.login.button_forgot_password_is_presented()
         for x in elts_dct.values():
             assert x is True
-    def test_WHEN_login_is_performed_AND_data_is_correct_EXPECTED_screen_is_presented(self):
-        self.app.string.get_random_userdata(self.app.user)
-        self.app.home_el.go_to_home_screen_and_wait()
-        self.app.signup.button_signup_press_and_wait()
-        self.app.signup.complete_registration(self.app.user)
-        self.app.api.email_confirmation(self.app)
+    def test_WHEN_login_is_performed_AND_data_is_correct_EXPECTED_screen_is_presented_TC3250(self):
+
+        self.app.login.register_new_user_and_go_to_login_screen(self.app)
+        self.app.login.field_email_send_key(self.app.user.email)
+        self.app.login.field_password_send_key(self.app.user.password1)
+        self.app.login.button_enter_press()
+        sleep(1)
+        assert self.app.login.user_is_logged_in()
+
+    def test_WHEN_email_is_incorrect_AND_try_to_login_EXPECTED_error_message_appears_TC3260(self):
+
+
+        self.app.login.field_email_send_key(self.app.string.get_random_incorrect_email_type1())
+        self.app.login.field_password_send_key(self.app.user.password1)
+        self.app.login.button_enter_press()
+        error_message = 'Unable to log in with provided credentials.'
+        assert self.app.login.error_message_appears(error_message)
+
+    def test_WHEN_password_is_incorrect_AND_try_to_login_EXPECTED_error_message_appears_TC3270(self):
+
+
+        self.app.login.field_password_send_key(self.app.string.get_random_two_passwords_numeric()[0])
+        self.app.login.field_email_send_key(self.app.user.email)
+        self.app.login.button_enter_press()
+        error_message = 'Unable to log in with provided credentials.'
+        assert self.app.login.error_message_appears(error_message)
+
+    def test_WHEN_forgot_password_but_pressed_EXPECTED_forgot_password_is_presented_TC3290(self):
+        self.app.login.button_forgot_password_press()
+        assert self.app.reset_pass.screen_reset_pasword_is_presented()
+
+
+
+
