@@ -4,6 +4,7 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.alert import Alert
 from selenium.webdriver.support.ui import WebDriverWait as wait
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.common.by import By
 
 
 from fixture.screens_helper.home_screen_elements_helper import HomeElements
@@ -34,14 +35,14 @@ class AppManager:
             self.profile = webdriver.FirefoxProfile()
             self.profile.set_preference('network.http.phishy-userpass-length', 255)
             self.driver = webdriver.Firefox()
+            self.driver.maximize_window()
             # self.driver.get("https://livecodingtv:csEAMHPfoetWUyY3hxwNPXuM@dev.liveedu.tv/")
-
-
             self.driver.get(self.env.base_url)
             wait(self.driver, 5).until(EC.alert_is_present())
             alert = self.driver.switch_to.alert
             alert.send_keys('livecodingtv' + Keys.TAB + 'csEAMHPfoetWUyY3hxwNPXuM')
             alert.accept()
+            wait(self.driver, 5).until(EC.presence_of_element_located((By.CSS_SELECTOR, 'header._10LKq')))
 
 
         else:
@@ -51,7 +52,7 @@ class AppManager:
         self.user_student = TestStudentUserData()
         self.user_creator = TestCreatorUserData()
 
-        self.driver.set_window_size(1024, 768)
+        # self.driver.set_window_size(1024, 768)
         self.driver.implicitly_wait(0.5)
         self.home_el = HomeElements(self)
         self.login = LoginHelper(self)

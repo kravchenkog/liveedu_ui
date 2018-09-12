@@ -13,7 +13,7 @@ class ResetPasswordHelper():
 
 
     def screen_reset_pasword_is_presented(self):
-        elts = self.driver.find_elements_by_css_selector(self.main_title)
+        elts = self.app.general.find_elementS_and_return(By.CSS_SELECTOR, self.main_title)
         if len(elts) > 0:
             if elts[0].text == 'Reset your password':
                 return True

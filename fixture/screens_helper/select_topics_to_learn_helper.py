@@ -1,11 +1,13 @@
+from selenium.webdriver.common.by import By
+
 class SelectTopicstoLearnHelper():
 
     def __init__(self, app):
         self.app = app
-        self.driver = app.driver
+
 
     def screen_select_topic_is_presented(self):
-        elements = self.driver.find_elements_by_css_selector("h2.ygWV5")
+        elements = self.app.general.find_elementS_and_return(By.CSS_SELECTOR, "h2.ygWV5")
         if len(elements) > 0:
             try:
                 text = elements[0].text

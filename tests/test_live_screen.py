@@ -9,14 +9,14 @@ class TestClass():
 
     def test_WHEN_live_screen_open_EXPECTED_3general_sections_are_presented_TC3600(self):
         elts_dct = {}
-        elts_dct['navigation'] = self.app.live.section_navigation_is_presented()
-        elts_dct['header'] = self.app.live.section_header_is_presented()
-        elts_dct['main'] = self.app.live.section_main_is_presented()
+        elts_dct['navigation'] = self.app.live.section_navigation_is_displayed()
+        elts_dct['header'] = self.app.live.section_header_is_displayed()
+        elts_dct['main'] = self.app.live.section_main_is_displayed()
         for x in elts_dct.values(): assert x
 
     def test_WHEN_live_screen_open_EXPECTED_8buttons_are_presented_in_navigation_TC3610(self):
         elts_dct = {}
-        elts_dct['logo'] = self.app.live.navigation_button_logo_is_presented()
+        elts_dct['logo'] = self.app.live.navigation_button_logo_is_displayed()
         elts_dct['live_now'] = self.app.live.navigation_button_live_now_is_presented('Live Now')
         elts_dct['projects'] = self.app.live.navigation_button_projects_is_presented('Projects')
         elts_dct['guides'] = self.app.live.navigation_button_guides_is_presented('Guides')

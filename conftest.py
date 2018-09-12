@@ -1,6 +1,7 @@
 import pytest
 fixture = None
 from fixture.appManager import AppManager
+from selenium.webdriver.common.by import By
 import time
 
 browser = 'firefox'
@@ -102,7 +103,9 @@ def smart_start_and_go_to_project_requests(fixture):
         fixture.home_el.logout_go_home_and_wait()
         fixture.home_el.button_learnlive_click()
         fixture.live.navigation_button_requests_press()
-        return fixture
+    # if fixture.request_project.button_all_is_selected() is True:
+    fixture.general.button_press(locator=By.CSS_SELECTOR, button=fixture.request_project.button_all_main_cat)
+    return fixture
 
 
 def smart_start(fixture):

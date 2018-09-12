@@ -5,44 +5,37 @@ from selenium.webdriver.common.by import By
 
 
 class UsernameHelper():
-    button_next = "button[type='submit']"
-    field_username = 'input[name="username"]'
+
+
 
     def __init__(self, app):
         self.app = app
-        self.driver = app.driver
-       # self.button_next = "button[type='submit']"
+        self.button_next = "button[type='submit']"
+        self.field_username = 'input[name="username"]'
+        self.title_top_css = "h2.ygWV5"
+        self.title_lower_css = "p._16y2Q"
+
 
     def screen_username_is_presented(self):
-        elements = self.driver.find_elements_by_css_selector(self.field_username)
-        if len(elements) > 0:
-            return True
-        else:
-            return False
+        return self.app.general.element_is_presented(By.CSS_SELECTOR, self.field_username)
 
     def screen_username_wait_presenting(self):
-        wait = WebDriverWait(self.driver, 10)
-        wait.until(EC.presence_of_element_located(
-            (By.CSS_SELECTOR, self.field_username)))
+        self.app.general.wait_presence_of_element(By.CSS_SELECTOR, self.field_username, 5)
 
-    def title_top_is_presented(self):
-        return self.app.general.element_is_displayed(self.app.driver.find_element_by_css_selector
-                                                     ("h2.ygWV5"))
+    def title_top_is_displayed(self):
+        return self.app.general.element_is_displayed(By.CSS_SELECTOR, self.title_top_css)
 
-    def title_lower_is_presented(self):
-        return self.app.general.element_is_displayed(self.app.driver.find_element_by_css_selector
-                                                     ("p._16y2Q"))
+    def title_lower_is_displayed(self):
+        return self.app.general.element_is_displayed(By.CSS_SELECTOR, self.title_lower_css)
 
-    def field_username_is_presented(self):
-        return self.app.general.element_is_displayed(self.app.driver.find_element_by_css_selector
-                                                     ("input[name='username']"))
+    def field_username_is_displayed(self):
+        return self.app.general.element_is_displayed(By.CSS_SELECTOR, self.field_username)
 
-    def button_next_is_presented(self):
-        return self.app.general.element_is_displayed(self.app.driver.find_element_by_css_selector
-                                                     (self.button_next))
+    def button_next_is_displayed(self):
+        return self.app.general.element_is_displayed(By.CSS_SELECTOR, self.button_next)
 
     def button_next_click(self):
-        self.app.driver.find_element_by_css_selector(self.button_next).click()
+        self.app.general.button_press(By.CSS_SELECTOR, self.button_next)
 
     def field_username_send_keys(self, user):
-        self.app.driver.find_element_by_css_selector(self.field_username).send_keys(user.username)
+        self.app.general.send_key(By.CSS_SELECTOR, self.field_username, user.username)
