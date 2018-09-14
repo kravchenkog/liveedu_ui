@@ -38,11 +38,11 @@ class AppManager:
             self.driver.maximize_window()
             # self.driver.get("https://livecodingtv:csEAMHPfoetWUyY3hxwNPXuM@dev.liveedu.tv/")
             self.driver.get(self.env.base_url)
-            wait(self.driver, 5).until(EC.alert_is_present())
+            wait(self.driver, 10).until(EC.alert_is_present())
             alert = self.driver.switch_to.alert
             alert.send_keys('livecodingtv' + Keys.TAB + 'csEAMHPfoetWUyY3hxwNPXuM')
             alert.accept()
-            wait(self.driver, 5).until(EC.presence_of_element_located((By.CSS_SELECTOR, 'header._10LKq')))
+            wait(self.driver, 10).until(EC.presence_of_element_located((By.CSS_SELECTOR, 'header._10LKq')))
 
 
         else:

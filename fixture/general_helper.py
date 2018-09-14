@@ -15,6 +15,16 @@ class GeneralHelper():
         else:
             return False
 
+
+    def el_is_displayed(self, element, arg=0):
+        locator_type = list(element.keys())[arg]
+        locator_value = list(element.values())[arg]
+        el = self.driver.find_element(locator_type, locator_value)
+        if el.is_displayed():
+            return True
+        else:
+            return False
+
     def element_is_displayed_by_element(self, element):
 
         if element.is_displayed():
@@ -42,6 +52,11 @@ class GeneralHelper():
     def button_press(self, locator, button):
         self.driver.find_element(locator, button).click()
 
+    def but_press(self, element, arg=0):
+        locator_type = list(element.keys())[arg]
+        locator_value = list(element.values())[arg]
+        self.driver.find_element(locator_type, locator_value).click()
+
     def button_press_element(self, button):
         button.click()
 
@@ -52,8 +67,24 @@ class GeneralHelper():
         else:
             return False
 
+    def el_is_presented(self, element, arg=0):
+        locator_type = list(element.keys())[arg]
+        locator_value = list(element.values())[arg]
+        el = self.driver.find_elements(locator_type, locator_value)
+        if len(el) > 0:
+            return True
+        else:
+            return False
+
     def get_element_by_text(self, text, loc_type, elements):
         els = self.driver.find_elements(loc_type, elements)
+        el = [x for x in els if x.text == text][0]
+        return el
+
+    def get_el_by_text(self, text, element, arg=0):
+        locator_type = list(element.keys())[arg]
+        locator_value = list(element.values())[arg]
+        els = self.driver.find_elements(locator_type, locator_value)
         el = [x for x in els if x.text == text][0]
         return el
 
@@ -61,6 +92,14 @@ class GeneralHelper():
 
         elements = main_el.find_elements(locator, element)
         return elements
+
+
+    def find_elS_in_element(self, main_el, element, arg=0):
+        locator_type = list(element.keys())[arg]
+        locator_value = list(element.values())[arg]
+        elements = main_el.find_elements(locator_type, locator_value)
+        return elements
+
 
     def go_to_url(self, url):
         self.driver.get(url)
@@ -79,6 +118,11 @@ class GeneralHelper():
         el = self.driver.find_element(locator, element)
         return el.text
 
+    def get_list_of_texts_in_elements(self, elements_list):
+
+        text = [x.text for x in elements_list]
+        return text
+
     def get_text_of_element_by_element(self, el):
 
         return el.text
@@ -87,8 +131,20 @@ class GeneralHelper():
         el = self.driver.find_element(locator_type, element)
         return el
 
+    def find_el_and_return(self, element, arg=0):
+        locator_type = list(element.keys())[arg]
+        locator_value = list(element.values())[arg]
+        el = self.driver.find_element(locator_type, locator_value)
+        return el
+
+
     def find_elementS_and_return(self, locator_type, element):
         el = self.driver.find_elements(locator_type, element)
+        return el
+    def find_elS_and_return(self, element, arg=0):
+        locator_type = list(element.keys())[arg]
+        locator_value = list(element.values())[arg]
+        el = self.driver.find_elements(locator_type, locator_value)
         return el
 
     def field_clear(self, locator, field):

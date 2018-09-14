@@ -10,4 +10,5 @@ class Route:
         self.email_confirmation = '/api/v3/auth/registration/verify-email/'
         self.login = '/api/v3/auth/login/'
         self.categories = '/api/v3/categories/'
+        self.projects_suggestions = '/api/v3/projects-suggestions/'
 
