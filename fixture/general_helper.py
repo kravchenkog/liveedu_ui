@@ -45,7 +45,8 @@ class GeneralHelper():
             return False
 
     def logout_perform(self):
-        self.driver.find_element_by_css_selector('button._1pGNL').click()
+        if not self.app.login.user_menu_is_opened():
+            self.driver.find_element_by_css_selector('button._1pGNL').click()
         self.driver.find_element_by_css_selector('button._1ko70').click()
         sleep(0.5)
 
@@ -108,14 +109,31 @@ class GeneralHelper():
         WebDriverWait(self.driver, time).until(
             EC.presence_of_element_located((locator, element)))
 
+    def wait_presence_of_el(self, element, time, arg=0):
+        locator_type = list(element.keys())[arg]
+        locator_value = list(element.values())[arg]
+        WebDriverWait(self.driver, time).until(
+            EC.presence_of_element_located((locator_type, locator_value)))
+
     def send_key(self, locator, element, string):
         self.driver.find_element(locator, element).send_keys(string)
+
+    def send_k(self, element, string, arg=0):
+        locator_type = list(element.keys())[arg]
+        locator_value = list(element.values())[arg]
+        self.driver.find_element(locator_type, locator_value).send_keys(string)
 
     def send_key_by_element(self, element, string):
         element.send_keys(string)
 
     def get_text_of_element(self, locator, element):
         el = self.driver.find_element(locator, element)
+        return el.text
+
+    def get_txt_of_el(self, element, arg=0):
+        locator_type = list(element.keys())[arg]
+        locator_value = list(element.values())[arg]
+        el = self.driver.find_element(locator_type, locator_value)
         return el.text
 
     def get_list_of_texts_in_elements(self, elements_list):

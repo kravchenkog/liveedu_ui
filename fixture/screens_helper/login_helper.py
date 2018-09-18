@@ -8,7 +8,8 @@ class LoginHelper():
 
     def __init__(self, app):
         self.app = app
-        self.driver = app.driver
+        self.general = self.app.general
+
         self.email_css = "input[name='username']"
         self.password = "input[name='password']"
         self.login_top_title_css = 'h2.ygWV5'
@@ -30,6 +31,10 @@ class LoginHelper():
         self.button_twitch_css = "button[class='_2nXzi UhJfk']"
         self.button_gg_css = "button[class='_2nXzi _1QVNY']"
         self.login_title_css = "div._1rrbV p[class='_3vdgo']"
+        self.user_menu_open_but = {By.CSS_SELECTOR: 'button._1pGNL'}
+        self.user_role = {By.CSS_SELECTOR: 'p._3-xEp'}
+        self.user_menu_section = {By.CSS_SELECTOR: 'ul.e_dik'}
+
 
     def button_login_press_and_wait(self):
         self.app.general.button_press(By.CSS_SELECTOR, self.button_login_css)
@@ -59,7 +64,7 @@ class LoginHelper():
     def section_login_with_social_is_displayed(self):
         return self.app.general.element_is_displayed(By.CSS_SELECTOR, self.section_login_with_social_css)
 
-    def  section_login_with_email_is_displayed(self):
+    def section_login_with_email_is_displayed(self):
         return self.app.general.element_is_displayed(By.CSS_SELECTOR, self.section_login_with_email_css)
 
     def title_social_is_displayed(self):
@@ -139,6 +144,12 @@ class LoginHelper():
         self.app.home_el.logout_go_home_and_wait()
         self.button_login_press_and_wait()
 
+    def login_perform(self, user):
+        self.button_login_press_and_wait()
+        self.field_email_send_key(user.email)
+        self.app.login.field_password_send_key(user.password1)
+        self.app.login.button_enter_press()
+
     def user_is_logged_in(self):
         if len(self.app.general.find_elementS_and_return(By.CSS_SELECTOR, 'button._1pGNL')) > 0:
             return self.app.general.element_is_displayed(By.CSS_SELECTOR, 'button._1pGNL')
@@ -154,6 +165,18 @@ class LoginHelper():
 
     def button_forgot_password_press(self):
         self.app.general.button_press(By.CSS_SELECTOR, self.forgot_password_css)
+
+    def get_logged_user_type(self):
+        self.general.but_press(self.user_menu_open_but)
+        role = self.general.get_txt_of_el(self.user_role)
+        if role == 'Subscriber':
+            return 1
+        if role == 'Project Creator':
+            return 2
+
+    def user_menu_is_opened(self):
+        return self.general.el_is_presented(self.user_menu_section)
+
 
 
 

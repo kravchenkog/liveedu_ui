@@ -1,7 +1,7 @@
 import random
 import requests
 import json
-
+import time
 
 class APIHelper:
 
@@ -44,14 +44,28 @@ class APIHelper:
 
         return slugs
 
+    def get_all_names_topics(self, app, route):
+        topics = self.general_get(app, route)
+        slugs = []
+        for topic in topics['results']:
+
+           slugs.append(topic['name'])
+
+        return slugs
+
     def get_random_slug_topic(self, app):
         list_of_slugs = self.get_all_slug_topics(app, route=app.route.topics)
         random_slug = list_of_slugs[random.randint(0, len(list_of_slugs) - 1)]
         return random_slug
 
+    def get_random_name_topic(self, app):
+        list_of_names = self.get_all_names_topics(app, route=app.route.topics)
+        random_name = list_of_names[random.randint(0, len(list_of_names) - 1)]
+        return random_name
+
     def get_random_list_of_slugs(self, app):
         list_of_all = self.get_all_slug_topics(app, route=app.route.topics)
-        no_el = random.randint(0, len(list_of_all) - 1)
+        no_el = random.randint(1, len(list_of_all) - 1)
         list_slugs = []
         for el in range(no_el):
             x = random.choice(list_of_all)
@@ -74,6 +88,8 @@ class APIHelper:
                 'skype': '123',
                 'hangouts': 'sdfsdf'}
         response_reg = self.general_post(app=app, route=app.route.register, data=data)
+        print(str(data))
+        print(str(response_reg))
         return user
 
     def email_confirmation(self, app, user):
@@ -82,7 +98,12 @@ class APIHelper:
 
     def get_confirmed_user(self, app, user, role='streamer'):
         user = self.get_registered_user(app, user, role)
-        self.email_confirmation(app, user)
+        time.sleep(1)
+        response = self.email_confirmation(app, user)
+        print("____________________________________")
+        print(response)
+        print(user.email)
+        print("____________________________________")
         return user
 
     def login_perform(self, app):

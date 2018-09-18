@@ -11,6 +11,7 @@ class ProjectRequestHelper():
     def __init__(self, app):
         self.app = app
         self.general = self.app.general
+
         self.request_project_button = {By.CSS_SELECTOR: 'button._31VgI'}
         self.main_menu_section = {By.CSS_SELECTOR: "nav._3iCnJ"}
         self.filters_section = {By.CSS_SELECTOR: "div._23IZv"}
@@ -45,6 +46,26 @@ class ProjectRequestHelper():
         self.date_of_proj_request = {By.CSS_SELECTOR: 'p._1kv2c'}
         self.project_request_titles = {By.CSS_SELECTOR: "p._1iHJC"}
         self.difficulty_text = {By.CSS_SELECTOR: "div.css-va7pk8"}
+        self.likes_button = {By.CSS_SELECTOR: 'button._3NVpD'}
+        self.likes_counter = {By.CSS_SELECTOR: "div[class='_1qY6Z _1vYWK']"}
+        self.description_of_pr = {By.CSS_SELECTOR: "p._3B9_Q"}
+        self.language_title = {By.CSS_SELECTOR: "p[class='_1A-k7 _2gT0V']"}
+        self.subcategory_icon = {By.CSS_SELECTOR: "p[class='_23KRX _2gT0V']"}
+        self.creator_name = {By.CSS_SELECTOR: "span._2-jmN"}
+        self.create_this_project = {By.CSS_SELECTOR: 'button._3hvKT'}
+        self.main_title = {By.CSS_SELECTOR: 'h2._2odmM'}
+        self.make_section_icon = {By.CSS_SELECTOR: 'div._3octD'}
+        self.make_section_title = {By.CSS_SELECTOR: 'p._2QuCm'}
+        self.make_section_text = {By.CSS_SELECTOR: "p._9YIIf"}
+        self.pr_popup = {By.CSS_SELECTOR: "div._3xr02"}
+        self.close_popup_button = {By.CSS_SELECTOR: 'button._2I1m1'}
+        self.pr_popup_main_title = {By.CSS_SELECTOR: 'h4._1YH3R'}
+        self.pr_popup_pname = {By.CSS_SELECTOR: 'input._2dUs0'}
+        self.pr_popup_subcategory = {By.CSS_SELECTOR: "div[class='css-1sontr1 hRuFE']"}
+        self.pr_popup_description = {By.CSS_SELECTOR: "textarea._2McB1"}
+        self.pr_popup_cat_dif_lang = {By.CSS_SELECTOR: "div[class='css-10nd86i hRuFE']"}
+        self.pr_popup_submit_button = {By.CSS_SELECTOR: "button._30Kmu"}
+
 
 
 
@@ -134,6 +155,7 @@ class ProjectRequestHelper():
         return ic_but_list
 
     def button_next_click(self):
+        self.general.wait_presence_of_el(self.button_next, 5)
         self.general.but_press(self.button_next)
 
     def get_no_pages(self):
@@ -306,6 +328,7 @@ class ProjectRequestHelper():
         return True
 
     def get_list_of_requests_by_api(self, difficulty=None, language=None):
+        self.clear_parans()
         if difficulty:
             self.app.env.params['difficulty'] = difficulty
         if language:
@@ -315,6 +338,8 @@ class ProjectRequestHelper():
         resp = self.app.api.general_get(app=self.app, route=self.app.route.projects_suggestions)
         titles = [x['title'] for x in resp['results']]
         return titles
+    def clear_parans(self):
+        self.app.env.params = {}
 
     def list_of_pr_req_related_to_api_list(self, list_api):
         pr_list_ui = self.general.get_list_of_texts_in_elements(
@@ -330,6 +355,35 @@ class ProjectRequestHelper():
     def get_language_filter(self):
         return self.get_filter_to_press(2)
 
+    def pr_element_is_displayed_in_each(self, element):
+        resuslt = [self.general.element_is_displayed_by_element(x)
+                   for x in self.general.find_elS_and_return(element)]
+        if all(resuslt):
+            return True
+        else:
+            return False
+
+    def get_counter_of_likes(self, element_no):
+        counter_value = int(self.general.get_text_of_element_by_element(
+            self.general.find_elS_and_return(self.likes_counter)[element_no]
+        ))
+        return counter_value
+    def press_likes_button(self, element_no):
+        el  = self.general.find_elS_and_return(self.likes_button)[element_no]
+        self.general.button_press_element(el)
+
+    def press_random_create_this_proj_button(self):
+        el  = random.choice(self.general.find_elS_and_return(self.create_this_project))
+        self.general.button_press_element(el)
+
+    def get_random_pr_data(self):
+        data = {'pr_name': self.app.string.get_random_email(),
+                'category': self.app.api.get_random_name_topic(self.app),
+                'subcategory': random.choice(self.get_list_of_sub_cat())['name'],
+                'difficulty': random.choice(['Beginner', 'Intermediate', 'Expert']),
+                'language': random.choice(['English', 'Russian']),
+                'description': self.app.string.get_random_email()}
+        return data
 
 
 

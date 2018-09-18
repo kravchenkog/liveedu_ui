@@ -15,20 +15,21 @@ class HomeElements():
         self.learn_on_demand = "a[href='/projects']"
         self.search_css = 'svg[data-id="5fa51239e3874c4badb514a895707d9e"]'
         self.button_login_css = 'a[href="/login"]'
+        self.main_logo = {By.CSS_SELECTOR: "a._3iGHW"}
+
 
 
     def button_signup_is_presented(self):
         return self.app.general.element_is_displayed(By.CSS_SELECTOR, self.button_sign_up)
 
     def home_screen_is_presented(self):
-        if self.button_signup_is_presented():
-            return True
-        else:
-            return False
+        return self.app.general.el_is_presented(self.main_logo)
 
     def button_learnlive_click(self):
         self.app.general.button_press(By.CSS_SELECTOR, self.button_learn_live)
-
+    def go_home_and_wait(self):
+        self.app.general.go_to_url("https://dev.liveedu.tv/")
+        self.app.general.wait_presence_of_element(By.CSS_SELECTOR, "a[class='_2NV3A _38w0o']", 5)
     def logout_go_home_and_wait(self):
         if self.app.login.user_is_logged_in():
             self.app.general.logout_perform()

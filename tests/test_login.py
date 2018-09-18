@@ -49,6 +49,7 @@ class TestClass():
         sleep(1)
         assert self.app.login.user_is_logged_in()
 
+
     def test_WHEN_email_is_incorrect_AND_try_to_login_EXPECTED_error_message_appears_TC3260(self):
 
 
