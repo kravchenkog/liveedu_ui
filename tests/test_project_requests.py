@@ -10,121 +10,121 @@ class TestClassPrRequest_not_logged():
         self.app.user_student = app_test_users.user_student
         self.pr = pr_notlogged.request_project
 
-    #
-    # def test_WHEN_choose_every_subcategory_EXPECTED_requests_lrkated_to_subcategory_TC6220(self, pr_notlogged):
-    #     dict_of_subcategories = self.app.request_project.get_list_of_sub_cat()
-    #     assert self.app.request_project.requests_are_related_to_sub_categories(dict_of_subcategories)
-    #
-    # def test_WHEN_requests_button_is_pressed_EXPECTED_project_requests_scr_opens_TC6200(self):
-    #     self.app.home_el.logout_go_home_and_wait()
-    #     self.app.home_el.button_learnlive_click()
-    #     self.app.live.navigation_button_requests_press()
-    #     assert self.app.request_project.screen_project_requests_is_displayed()
-    #
-    # def test_WHEN_requests_screen_opened_EXPECTED_5_sections_presented_TC6205(self):
-    #     elts_dct = {}
-    #     elts_dct['main_menu_section'] = self.pr.main_menu_section_is_presented()
-    #     elts_dct['filters_section'] = self.pr.filters_section_is_presented()
-    #     elts_dct['requests_list_section'] = self.pr.requests_list_section_is_presented()
-    #     elts_dct['instruction_section'] = self.pr.instruction_section_is_presented()
-    #     #elts_dct['pagination_section'] = self.app.request_project.pagination_section_is_presented()
-    #     assert all(elts_dct.values())
-    #
-    # def test_WHEN_requests_screen_opened_EXPECTED_5_elements_in_filters_TC6210(self):
-    #     elts_dct = {}
-    #     main_cat_filters = ['All', 'Programming', 'Game development', 'Data science', 'Design',
-    #                         'Artificial intelligence', 'CryptoCurrency', 'VR & AR', 'Cybersecurity']
-    #
-    #     elts_dct['main_cat_filters'] = self.pr.main_cat_filters_is_presented(main_cat_filters)
-    #     elts_dct['subcategory_filters'] = self.pr.subcategory_filters_is_presented()
-    #     elts_dct['popularity_latest_sorting'] = self.pr.popularity_latest_sorting_is_presented()
-    #     elts_dct['difficulty_filter'] = self.pr.difficulty_filter_section_is_presented()
-    #     elts_dct['language_filter'] = self.pr.language_filter_is_presented()
-    #     for x in elts_dct.values():
-    #         assert x is True
-    #
-    # def test_WHEN_main_category_selected_EXPECTED_all_request_relatred_to_selected_category_TC6215(self):
-    #     assert self.pr.list_of_requests_related_to_each_selected_category()
-    #
-    #
-    # def test_WHEN_maincategory_and_subcat_selected_EXPECTED_project_requests_are_proper_TC6222(self, pr_notlogged):
-    #     main_cat = 'Programming'
-    #     sub_cat = 'Python'
-    #     assert self.pr.all_requests_related_to_sub_and_main_cat(main_cat, sub_cat)
-    #
-    #
-    # def test_WHEN_subcategory_is_selected_EXPECTED_x_button_is_presented_TC6223(self, pr_notlogged):
-    #     self.pr.select_and_enter_random_subcategory()
-    #     assert self.pr.close_x_button_is_presented(self.app.request_project.buttons_in_filter)
-    #
-    # def test_WHEN_subcategory_is_selected_and_x_pressed_EXPECTED_filter_is_reseted_TC6223(self, pr_notlogged):
-    #     filter = self.pr.get_filter_by_text('Choose a category')
-    #     self.pr.select_and_enter_random_subcategory()
-    #     self.pr.close_x_button_click(filter, self.pr.choose_a_category)
-    #     assert not self.pr.close_x_button_is_presented(self.pr.buttons_in_filter)
-    #
-    # def test_WHEN_sorting_by_popularity_is_selected_EXPECTED_items_are_sorted_TC6225(self, pr_notlogged):
-    #     self.pr.select_value_in_right_filters(0, 'Most Popular') #0=Popular/New 1=Difficulty 2=Language
-    #     assert self.pr.list_of_requests_sorted_by_popularity()
-    #
-    # def test_WHEN_sorting_by_latest_is_selected_EXPECTED_items_are_sorted_TC6226(self, pr_notlogged):
-    #     self.pr.select_value_in_right_filters(0, 'Latest') #0=Popular/New 1=Difficulty 2=Language
-    #     assert self.pr.list_of_requests_sorted_by_latest()
-    #
-    # def test_WHEN_filter_by_difficulty_is_selected_EXPECTED_items_are_filtered_TC6231(self, pr_notlogged):
-    #     self.pr.select_value_in_right_filters(1, 'Beginner')
-    #     list_api = self.pr.get_list_of_requests_by_api(difficulty=1)
-    #     assert self.pr.list_of_pr_req_related_to_api_list(list_api)
-    #
-    # def test_WHEN_diffic_is_selected_and_x_pressed_EXPECTED_filter_is_reseted_TC6232(
-    #         self,  pr_notlogged):
-    #
-    #     filter_d = self.pr.get_difficulty_filter()
-    #     button = self.pr.select_value_in_right_filters(1, 'Beginner')
-    #     self.pr.close_x_button_click(filter_d, button, 1) #1 if click of element (not locator)
-    #     assert not self.pr.close_x_button_is_presented(self.pr.buttons_in_filter, filter_d)
-    #
-    # def test_WHEN_filter_by_language_is_selected_EXPECTED_items_are_filtered_TC6231(
-    #         self, pr_notlogged):
-    #
-    #     self.pr.select_value_in_right_filters(2, 'English')
-    #     list_api = self.pr.get_list_of_requests_by_api(language='en') #english
-    #     assert self.pr.list_of_pr_req_related_to_api_list(list_api)
-    #
-    # def test_WHEN_lang_is_selected_and_x_pressed_EXPECTED_filter_is_reseted_TC6232(self, pr_notlogged):
-    #     filter_l = self.pr.get_language_filter()
-    #     button = self.pr.select_value_in_right_filters(2, 'English')
-    #     self.pr.close_x_button_click(filter_l, button, 1) #1 if click of element (not locator)
-    #     assert not self.pr.close_x_button_is_presented(self.pr.buttons_in_filter, filter_l)
-    #
-    #
-    # def test_WHEN_several_filters_are_selected_EXPECTED_items_are_filtered_TC6231(self, pr_notlogged):
-    #     self.pr.select_value_in_right_filters(2, 'English')
-    #     self.pr.select_value_in_right_filters(1, 'Beginner')
-    #     list_api = self.pr.get_list_of_requests_by_api(language='en', difficulty=1)  # english
-    #     assert self.pr.list_of_pr_req_related_to_api_list(list_api)
-    #
-    # def test_WHEN_user_is_not_logged_EXPECTED_elements_in_pr_correct_TC6252(self, pr_student):
-    #     elts_dct = {}
-    #     elts_dct['likes_counter'] = self.pr.pr_element_is_displayed_in_each(
-    #         self.pr.likes_button)
-    #     elts_dct['likes_button'] = self.pr.pr_element_is_displayed_in_each(
-    #         self.pr.likes_counter)
-    #     elts_dct['title'] = self.pr.pr_element_is_displayed_in_each(
-    #         self.pr.project_request_titles)
-    #     elts_dct['description'] = self.pr.pr_element_is_displayed_in_each(
-    #         self.pr.description_of_pr)
-    #     elts_dct['language'] = self.pr.pr_element_is_displayed_in_each(
-    #         self.pr.language_title)
-    #     elts_dct['subcategory_icon'] = self.pr.pr_element_is_displayed_in_each(
-    #         self.pr.subcategory_icon)
-    #     elts_dct['name_of_creator'] = self.pr.pr_element_is_displayed_in_each(
-    #         self.pr.creator_name)
-    #     elts_dct['creation_date'] = self.pr.pr_element_is_displayed_in_each(
-    #         self.pr.date_of_proj_request)
-    #
-    #
-    #     assert all(elts_dct.values())
+
+    def test_WHEN_choose_every_subcategory_EXPECTED_requests_lrkated_to_subcategory_TC6220(self, pr_notlogged):
+        dict_of_subcategories = self.app.request_project.get_list_of_sub_cat()
+        assert self.app.request_project.requests_are_related_to_sub_categories(dict_of_subcategories)
+
+    def test_WHEN_requests_button_is_pressed_EXPECTED_project_requests_scr_opens_TC6200(self):
+        self.app.home_el.logout_go_home_and_wait()
+        self.app.home_el.button_learnlive_click()
+        self.app.live.navigation_button_requests_press()
+        assert self.app.request_project.screen_project_requests_is_displayed()
+
+    def test_WHEN_requests_screen_opened_EXPECTED_5_sections_presented_TC6205(self):
+        elts_dct = {}
+        elts_dct['main_menu_section'] = self.pr.main_menu_section_is_presented()
+        elts_dct['filters_section'] = self.pr.filters_section_is_presented()
+        elts_dct['requests_list_section'] = self.pr.requests_list_section_is_presented()
+        elts_dct['instruction_section'] = self.pr.instruction_section_is_presented()
+        #elts_dct['pagination_section'] = self.app.request_project.pagination_section_is_presented()
+        assert all(elts_dct.values())
+
+    def test_WHEN_requests_screen_opened_EXPECTED_5_elements_in_filters_TC6210(self):
+        elts_dct = {}
+        main_cat_filters = ['All', 'Programming', 'Game development', 'Data science', 'Design',
+                            'Artificial intelligence', 'CryptoCurrency', 'VR & AR', 'Cybersecurity']
+
+        elts_dct['main_cat_filters'] = self.pr.main_cat_filters_is_presented(main_cat_filters)
+        elts_dct['subcategory_filters'] = self.pr.subcategory_filters_is_presented()
+        elts_dct['popularity_latest_sorting'] = self.pr.popularity_latest_sorting_is_presented()
+        elts_dct['difficulty_filter'] = self.pr.difficulty_filter_section_is_presented()
+        elts_dct['language_filter'] = self.pr.language_filter_is_presented()
+        for x in elts_dct.values():
+            assert x is True
+
+    def test_WHEN_main_category_selected_EXPECTED_all_request_relatred_to_selected_category_TC6215(self):
+        assert self.pr.list_of_requests_related_to_each_selected_category()
+
+
+    def test_WHEN_maincategory_and_subcat_selected_EXPECTED_project_requests_are_proper_TC6222(self, pr_notlogged):
+        main_cat = 'Programming'
+        sub_cat = 'Python'
+        assert self.pr.all_requests_related_to_sub_and_main_cat(main_cat, sub_cat)
+
+
+    def test_WHEN_subcategory_is_selected_EXPECTED_x_button_is_presented_TC6223(self, pr_notlogged):
+        self.pr.select_and_enter_random_subcategory()
+        assert self.pr.close_x_button_is_presented(self.app.request_project.buttons_in_filter)
+
+    def test_WHEN_subcategory_is_selected_and_x_pressed_EXPECTED_filter_is_reseted_TC6223(self, pr_notlogged):
+        filter = self.pr.get_filter_by_text('Choose a category')
+        self.pr.select_and_enter_random_subcategory()
+        self.pr.close_x_button_click(filter, self.pr.choose_a_category)
+        assert not self.pr.close_x_button_is_presented(self.pr.buttons_in_filter)
+
+    def test_WHEN_sorting_by_popularity_is_selected_EXPECTED_items_are_sorted_TC6225(self, pr_notlogged):
+        self.pr.select_value_in_right_filters(0, 'Most Popular') #0=Popular/New 1=Difficulty 2=Language
+        assert self.pr.list_of_requests_sorted_by_popularity()
+
+    def test_WHEN_sorting_by_latest_is_selected_EXPECTED_items_are_sorted_TC6226(self, pr_notlogged):
+        self.pr.select_value_in_right_filters(0, 'Latest') #0=Popular/New 1=Difficulty 2=Language
+        assert self.pr.list_of_requests_sorted_by_latest()
+
+    def test_WHEN_filter_by_difficulty_is_selected_EXPECTED_items_are_filtered_TC6231(self, pr_notlogged):
+        self.pr.select_value_in_right_filters(1, 'Beginner')
+        list_api = self.pr.get_list_of_requests_by_api(difficulty=1)
+        assert self.pr.list_of_pr_req_related_to_api_list(list_api)
+
+    def test_WHEN_diffic_is_selected_and_x_pressed_EXPECTED_filter_is_reseted_TC6232(
+            self,  pr_notlogged):
+
+        filter_d = self.pr.get_difficulty_filter()
+        button = self.pr.select_value_in_right_filters(1, 'Beginner')
+        self.pr.close_x_button_click(filter_d, button, 1) #1 if click of element (not locator)
+        assert not self.pr.close_x_button_is_presented(self.pr.buttons_in_filter, filter_d)
+
+    def test_WHEN_filter_by_language_is_selected_EXPECTED_items_are_filtered_TC6231(
+            self, pr_notlogged):
+
+        self.pr.select_value_in_right_filters(2, 'English')
+        list_api = self.pr.get_list_of_requests_by_api(language='en') #english
+        assert self.pr.list_of_pr_req_related_to_api_list(list_api)
+
+    def test_WHEN_lang_is_selected_and_x_pressed_EXPECTED_filter_is_reseted_TC6232(self, pr_notlogged):
+        filter_l = self.pr.get_language_filter()
+        button = self.pr.select_value_in_right_filters(2, 'English')
+        self.pr.close_x_button_click(filter_l, button, 1) #1 if click of element (not locator)
+        assert not self.pr.close_x_button_is_presented(self.pr.buttons_in_filter, filter_l)
+
+
+    def test_WHEN_several_filters_are_selected_EXPECTED_items_are_filtered_TC6231(self, pr_notlogged):
+        self.pr.select_value_in_right_filters(2, 'English')
+        self.pr.select_value_in_right_filters(1, 'Beginner')
+        list_api = self.pr.get_list_of_requests_by_api(language='en', difficulty=1)  # english
+        assert self.pr.list_of_pr_req_related_to_api_list(list_api)
+
+    def test_WHEN_user_is_not_logged_EXPECTED_elements_in_pr_correct_TC6252(self, pr_student):
+        elts_dct = {}
+        elts_dct['likes_counter'] = self.pr.pr_element_is_displayed_in_each(
+            self.pr.likes_button)
+        elts_dct['likes_button'] = self.pr.pr_element_is_displayed_in_each(
+            self.pr.likes_counter)
+        elts_dct['title'] = self.pr.pr_element_is_displayed_in_each(
+            self.pr.project_request_titles)
+        elts_dct['description'] = self.pr.pr_element_is_displayed_in_each(
+            self.pr.description_of_pr)
+        elts_dct['language'] = self.pr.pr_element_is_displayed_in_each(
+            self.pr.language_title)
+        elts_dct['subcategory_icon'] = self.pr.pr_element_is_displayed_in_each(
+            self.pr.subcategory_icon)
+        elts_dct['name_of_creator'] = self.pr.pr_element_is_displayed_in_each(
+            self.pr.creator_name)
+        elts_dct['creation_date'] = self.pr.pr_element_is_displayed_in_each(
+            self.pr.date_of_proj_request)
+
+
+        assert all(elts_dct.values())
 class TestClassPrRequest_student():
     @pytest.fixture(autouse=True)
     def _request_signup_page(self, pr_student, app_test_users):
@@ -202,11 +202,15 @@ class TestClassPrRequest_student():
         self.app.general.but_press(self.pr.close_popup_button)
         assert not self.app.general.el_is_presented(self.pr.pr_popup)
 
-    def test_WHEN_all_fields_filled_in_prpopup_EXPECTED_pr_is_saved(self, pr_student):
+    def _test_WHEN_all_fields_filled_in_prpopup_EXPECTED_pr_is_saved(self, pr_student):
         random_pr = self.pr.get_random_pr_data()
         self.app.general.but_press(self.pr.request_project_button)
         self.app.general.send_k(self.pr.pr_popup_pname, random_pr['pr_name'])
         self.app.general.send_k(self.pr.pr_popup_description, random_pr['description'])
+        self.pr.choose_value_on_popup(random_pr, 'Choose a topic')
+
+        self.app.general.but_press(self.pr.pr_popup_submit_button)
+        assert not self.app.general.el_is_presented(self.pr.pr_popup)
 
 
 
@@ -217,6 +221,7 @@ class TestClassPrRequest_creator():
         self.app.user_creator = app_test_users.user_creator
         self.app.user_student = app_test_users.user_student
         self.pr = pr_creator.request_project
+
 
 
     def test_WHEN_creator_is_logged_EXPECTED_elements_in_pr_correct_TC6251(self, pr_creator):

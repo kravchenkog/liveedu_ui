@@ -83,10 +83,11 @@ class GeneralHelper():
         return el
 
     def get_el_by_text(self, text, element, arg=0):
+        text = text.lower()
         locator_type = list(element.keys())[arg]
         locator_value = list(element.values())[arg]
         els = self.driver.find_elements(locator_type, locator_value)
-        el = [x for x in els if x.text == text][0]
+        el = [x for x in els if text in x.text.lower()][0]
         return el
 
     def find_elements_in_element(self, main_el, locator, element):
@@ -168,6 +169,16 @@ class GeneralHelper():
     def field_clear(self, locator, field):
         el = self.driver.find_element(locator, field)
         el.clear()
+
+    def fld_clear(self, element, arg=0):
+        locator_type = list(element.keys())[arg]
+        locator_value = list(element.values())[arg]
+        el = self.driver.find_element(locator_type, locator_value)
+        el.clear()
+
+    def get_el_by_name(self, name, locator):
+        el = self.get_el_by_text(text=name, element=locator)
+        return el
 
 
 

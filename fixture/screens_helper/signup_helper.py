@@ -7,9 +7,12 @@ class SignUpHelper():
 
     def __init__(self, app):
         self.app = app
-        self.button_sign_up = 'a[href="/signup"]'
-        self.field_confirm_password_css = "input[name='passwordConfirm']"
-        self.section_signup_with_social_css = 'div._27wqJ'
+        self.general = self.app.general
+        self.home = self.app.home_el
+        self.file_signup1 = "signup-step-0"
+
+        self.form_left = {By.CSS_SELECTOR: "div[class^='{}__form-left']".format(self.file_signup1)}
+        self.field_confirm_password = {By.CSS_SELECTOR: "input[name='passwordConfirm']"}
         self.section_top_xpath = '//div[@class="_3Mtqt"]'
         self.section_signup_with_social_xpath = "//div[@class='_27wqJ']"
         self.section_signup_with_email_xpath = '//div[@class="_1ncq1"]'
@@ -32,15 +35,16 @@ class SignUpHelper():
 
 
     def button_signup_press_and_wait(self):
-        self.app.general.button_press(By.CSS_SELECTOR, self.button_sign_up)
-        self.app.general.wait_presence_of_element(By.CSS_SELECTOR, self.field_confirm_password_css, 5)
-        self.app.general.wait_presence_of_element(By.CSS_SELECTOR, self.section_signup_with_social_css, 5)
+        button = self.home.get_button_by_name("Sign Up", locator=self.home.auth_buttons)
+        self.general.button_press_element(button)
+        self.app.general.wait_presence_of_el(self.field_confirm_password, 5)
+        self.app.general.wait_presence_of_el(self.form_left, 5)
 
     def screen_signup_is_presented(self):
-        return self.app.general.element_is_presented(By.CSS_SELECTOR, self.field_confirm_password_css)
+        return self.app.general.el_is_presented(self.field_confirm_password)
 
     def screen_signup_is_displayed(self):
-        return self.app.general.element_is_displayed(By.CSS_SELECTOR, self.field_confirm_password_css)
+        return self.app.general.el_is_displayed(self.field_confirm_password)
 
     def section_top_is_displayed(self):
         return self.app.general.element_is_displayed(By.XPATH, self.section_top_xpath)
@@ -94,7 +98,7 @@ class SignUpHelper():
         return self.app.general.element_is_displayed(By.CSS_SELECTOR, self.field_password)
 
     def field_confirm_password_is_displayed(self):
-        return self.app.general.element_is_displayed(By.CSS_SELECTOR, self.field_confirm_password_css)
+        return self.app.general.el_is_displayed(self.field_confirm_password)
 
     def button_start_learning_is_displayed(self):
         return self.app.general.element_is_displayed(By.CSS_SELECTOR, self.button_start_learning_css)
@@ -112,10 +116,11 @@ class SignUpHelper():
         self.app.general.field_clear(By.CSS_SELECTOR, self.field_password)
 
     def field_confirm_password_send_keys(self, user):
-        self.app.general.send_key(By.CSS_SELECTOR, self.field_confirm_password_css, user.password2)
+        field = self.genereal.find_el_and_return(self.field_confirm_password)
+        self.app.general.send_key_by_element(element=field, string=user.password2)
 
     def field_confirm_password_clear(self):
-        self.app.general.field_clear(By.CSS_SELECTOR, self.field_confirm_password_css)
+        self.app.general.fld_clear(self.field_confirm_password)
 
     def button_start_learning_press(self):
         self.app.general.button_press(By.CSS_SELECTOR, self.button_start_learning_css)

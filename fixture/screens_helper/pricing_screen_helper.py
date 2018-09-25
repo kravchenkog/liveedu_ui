@@ -11,9 +11,15 @@ class PricingHelper():
 
     def __init__(self, app):
         self.app = app
-        self.section1_css = 'section._3Cz_2'
-        self.section2_css = 'section._3U5zj'
-        self.section3_css = 'section._1iqyF'
+        self.file_pricing1 = 'slider'
+        self.file_pricing2 = 'categories'
+        self.file_pricing3 = "futures"
+
+        self.slider_section = {By.CSS_SELECTOR: "section[class^='{}__slider']".format(self.file_pricing1)}
+        self.categories_section = {By.CSS_SELECTOR: "section[class^='{}__categories']".format(self.file_pricing2)}
+        self.futures_section = {By.CSS_SELECTOR: "section[class^='{}__futures']".format(self.file_pricing3)}
+
+
         self.section4_css = 'section._2d1zH'
         self.section5_css = 'section._2M8gV'
         self.section6_css = 'section._3W4c4'
@@ -33,13 +39,13 @@ class PricingHelper():
         return self.app.general.element_is_presented(By.CSS_SELECTOR, "div.global-faq-accordion")
 
     def main_section_1_is_presented(self):
-        return self.app.general.element_is_displayed(By.CSS_SELECTOR, self.section1_css)
+        return self.app.general.el_is_displayed(self.slider_section)
 
     def main_section_2_is_presented(self):
-        return self.app.general.element_is_displayed(By.CSS_SELECTOR, self.section2_css)
+        return self.app.general.el_is_displayed(self.categories_section)
 
     def main_section_3_is_presented(self):
-        return self.app.general.element_is_displayed(By.CSS_SELECTOR, self.section3_css)
+        return self.app.general.el_is_displayed(self.futures_section)
 
     def main_section_4_is_presented(self):
         return self.app.general.element_is_displayed(By.CSS_SELECTOR, self.section4_css)

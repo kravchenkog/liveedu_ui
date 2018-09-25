@@ -9,13 +9,12 @@ class ResetPasswordHelper():
     def __init__(self, app):
         self.app = app
         self.driver = app.driver
-        self.main_title = 'h2.ygWV5'
+        self.file_forgot1 = 'login-signup-header'
+
+        self.header = {By.CSS_SELECTOR: "h2[class^='{}__title']".format(self.file_forgot1)}
 
 
     def screen_reset_pasword_is_presented(self):
-        elts = self.app.general.find_elementS_and_return(By.CSS_SELECTOR, self.main_title)
+        elts = self.app.general.find_elS_and_return(self.header)
         if len(elts) > 0:
-            if elts[0].text == 'Reset your password':
-                return True
-        else:
-            return False
+            return elts[0].text == 'Reset your password'

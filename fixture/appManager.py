@@ -30,6 +30,9 @@ from fixture.screens_helper.project_request_helper import ProjectRequestHelper
 class AppManager:
     def __init__(self, browser):
         self.env = Environment(1)  # dev
+
+
+
         if browser == 'firefox':
 
             self.profile = webdriver.FirefoxProfile()
@@ -42,7 +45,9 @@ class AppManager:
             alert = self.driver.switch_to.alert
             alert.send_keys('livecodingtv' + Keys.TAB + 'csEAMHPfoetWUyY3hxwNPXuM')
             alert.accept()
-            wait(self.driver, 20).until(EC.presence_of_element_located((By.CSS_SELECTOR, 'header._10LKq')))
+            self.general = GeneralHelper(self)
+            self.home_el = HomeElements(self)
+            self.general.wait_presence_of_el(self.home_el.logo, 5)
 
 
         else:
@@ -52,6 +57,8 @@ class AppManager:
         self.user_student = TestStudentUserData()
         self.user_creator = TestCreatorUserData()
 
+        self.general = GeneralHelper(self)
+        self.home_el = HomeElements(self)
         # self.driver.set_window_size(1024, 768)
         self.driver.implicitly_wait(0.5)
         self.general = GeneralHelper(self)

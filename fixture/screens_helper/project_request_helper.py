@@ -2,6 +2,7 @@ from time import sleep
 import random
 from selenium.webdriver.common.by import By
 from datetime import datetime
+from selenium.webdriver.common import keys
 
 
 
@@ -11,8 +12,8 @@ class ProjectRequestHelper():
     def __init__(self, app):
         self.app = app
         self.general = self.app.general
-
-        self.request_project_button = {By.CSS_SELECTOR: 'button._31VgI'}
+        self.file_name1 = "fsfsdfsdf"
+        self.request_project_button = {By.CSS_SELECTOR: 'button.{}_31VgI'.format(self.file_name1)}
         self.main_menu_section = {By.CSS_SELECTOR: "nav._3iCnJ"}
         self.filters_section = {By.CSS_SELECTOR: "div._23IZv"}
         self.requests_list_section = {By.CSS_SELECTOR: "div._305lF"}
@@ -65,6 +66,9 @@ class ProjectRequestHelper():
         self.pr_popup_description = {By.CSS_SELECTOR: "textarea._2McB1"}
         self.pr_popup_cat_dif_lang = {By.CSS_SELECTOR: "div[class='css-10nd86i hRuFE']"}
         self.pr_popup_submit_button = {By.CSS_SELECTOR: "button._30Kmu"}
+        self.pr_popup_main_cat_input ={By.CSS_SELECTOR: "input"}
+        self.pr_popup_drodowns = {By.CSS_SELECTOR: 'div.css-1oxma2j'}
+        self.pr_popup_drodowns2 = {By.CSS_SELECTOR: 'div.css-1rtrksz'}
 
 
 
@@ -301,6 +305,7 @@ class ProjectRequestHelper():
     def enter_value_to_filter_and_tap_enter(self, filtr, text, input, symbol=""):
         self.general.button_press_element(filtr)
 
+
         self.general.send_key_by_element(input, text + symbol)
         self.general.send_key_by_element(input, u'\ue007')
 
@@ -333,7 +338,7 @@ class ProjectRequestHelper():
             self.app.env.params['difficulty'] = difficulty
         if language:
             self.app.env.params['language'] = language
-        self.app.env.params['ordering'] = '-vote_score'
+        self.app.env.params['ordering'] = '-num_vote_up'
         self.app.env.params['limit'] = 10
         resp = self.app.api.general_get(app=self.app, route=self.app.route.projects_suggestions)
         titles = [x['title'] for x in resp['results']]
@@ -384,6 +389,15 @@ class ProjectRequestHelper():
                 'language': random.choice(['English', 'Russian']),
                 'description': self.app.string.get_random_email()}
         return data
+
+    def choose_value_on_popup(self, value, dropdown):
+        el = self.general.get_el_by_text(element=self.pr_popup_drodowns2, text=dropdown)
+        input_f = self.general.find_elS_in_element(main_el=el, element=self.pr_popup_main_cat_input)[0]
+        self.enter_value_to_filter_and_tap_enter(el, value['category'], input_f)
+
+
+
+
 
 
 

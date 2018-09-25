@@ -7,120 +7,99 @@ from time import sleep
 class LiveScreenHelper():
     def __init__(self, app):
         self.app = app
-        self.navigation_sec_css = 'nav._3iCnJ'
-        self.header_sec_css = 'header._28RNe'
-        self.main_sec_css = 'main._2pzbf'
-        self.but_live_now_xpath = "//ul[@class='_4CGHb _2k_rN']//li[1]/a"
-        self.but_logo_css = 'a.P80aM'
-        self.but_projects_xpath = "//ul[@class='_4CGHb _2k_rN']//li[2]/a"
-        self.but_guides_xpath = "//ul[@class='_4CGHb _2k_rN']//li[3]/a"
-        self.but_schedule_xpath = "//ul[@class='_4CGHb _2k_rN']//li[4]/a"
-        self.but_requests_xpath = "//ul[@class='_4CGHb _2k_rN']//li[5]/a"
-        self.but_subscribe_xpath = "//ul[@class='_4CGHb _3zRnY']//li[1]/a"
-        self.but_more_xpath = "//ul[@class='_4CGHb _3zRnY']//li[2]"
-        self.main_title_h2_css = 'h2._2odmM'
-        self.buttons_more_css = "li[class='i_Fzp']"
+        self.general = self.app.general
+
+        self.file_live1 = "site-navigation"
+        self.file_live2 = "site-header"
+        self.file_live3 = "main-layout"
+        self.file_live4 = 'site-header'
+        self.file_live5 = 'nav-dropdown'
+        self.file_live6 = "nav-link"
+
+        self.navigation_sec = {By.CSS_SELECTOR: "nav[class^='{}__navigation']".format(self.file_live1)}
+        self.header_sec = {By.CSS_SELECTOR: "header[class^='{}__header']".format(self.file_live2)}
+        self.main_sec = {By.CSS_SELECTOR: "main[class^='{}__app']".format(self.file_live3)}
+        self.logo = {By.CSS_SELECTOR: "a[class^='{}__logo']".format(self.file_live1)}
+        self.header_title = {By.CSS_SELECTOR: "h2[class^='{}__title']".format(self.file_live4)}
+        self.button_more = {By.CSS_SELECTOR: "button[class^='{}__button']".format(self.file_live5)}
+        self.nav_buttons = {By.CSS_SELECTOR: "a[class^='{}__link']".format(self.file_live6)}
+        self.button_more_items = {By.CSS_SELECTOR: "a[class^='{}__link']".format(self.file_live5)}
+
 
     def screen_live_is_presented(self):
         return self.app.general.screen_is_presented_by_url("https://dev.liveedu.tv/live")
 
     def section_navigation_is_displayed(self):
-        return self.app.general.element_is_displayed(By.CSS_SELECTOR, self.navigation_sec_css)
+        return self.general.el_is_displayed(self.navigation_sec)
 
     def section_header_is_displayed(self):
-        return self.app.general.element_is_displayed(By.CSS_SELECTOR, self.header_sec_css)
+        return self.general.el_is_displayed(self.header_sec)
 
     def section_main_is_displayed(self):
-        return self.app.general.element_is_displayed(By.CSS_SELECTOR, self.main_sec_css)
+        return self.app.general.el_is_displayed(self.main_sec)
+
+    def navigation_button_is_displayed(self, button_text):
+        buttons = self.app.general.find_elS_and_return(self.nav_buttons)
+        buttons.append(self.app.general.find_el_and_return(self.button_more))
+        texts = self.app.general.get_list_of_texts_in_elements(buttons)
+
+        for text in texts:
+            if button_text in text:
+                return True
+        return False
+
+    def navigation_button_press(self, button_text):
+        buttons = self.app.general.find_elS_and_return(self.nav_buttons)
+        buttons.append(self.app.general.find_el_and_return(self.button_more))
+        texts = self.app.general.get_list_of_texts_in_elements(buttons)
+
+        counter = 0
+        for text in texts:
+
+            if button_text in text:
+                self.app.general.button_press_element(buttons[counter])
+                continue
+
+            else:
+                counter+=1
 
     def navigation_button_logo_is_displayed(self):
-        return self.app.general.element_is_displayed(By.CSS_SELECTOR, self.but_logo_css)
+        return self.app.general.el_is_displayed(self.logo)
 
-    def navigation_button_live_now_is_presented(self, should):
-        text = self.app.general.get_text_of_element(By.XPATH, self.but_live_now_xpath)
-        return should in text
-
-    def navigation_button_projects_is_presented(self, should):
-        text = self.app.general.get_text_of_element(By.XPATH, self.but_projects_xpath)
-        return should in text
-
-    def navigation_button_guides_is_presented(self, should):
-        text = self.app.general.get_text_of_element(By.XPATH, self.but_guides_xpath)
-        return should in text
-
-    def navigation_button_schedule_is_presented(self, should):
-        text = self.app.general.get_text_of_element(By.XPATH, self.but_schedule_xpath)
-        return should in text
-
-    def navigation_button_requests_is_presented(self, should):
-        text = self.app.general.get_text_of_element(By.XPATH, self.but_requests_xpath)
-        return should in text
-
-    def navigation_button_subscribe_is_presented(self, should):
-        text = self.app.general.get_text_of_element(By.XPATH, self.but_subscribe_xpath)
-        return should in text
-
-    def navigation_button_more_is_presented(self, should):
-        text = self.app.general.get_text_of_element(By.XPATH, self.but_more_xpath)
-        return should in text
 
     def navigation_button_logo_press(self):
-        self.app.general.button_press(By.CSS_SELECTOR, self.but_logo_css)
+        self.general.but_press(self.logo)
         sleep(1)
 
-    def navigation_button_livenow_press(self):
-
-        self.app.general.button_press(By.XPATH, self.but_live_now_xpath)
-        sleep(1)
-
-    def navigation_button_projects_press(self):
-
-        self.app.general.button_press(By.XPATH, self.but_projects_xpath)
-        sleep(1)
-
-    def navigation_button_guides_press(self):
-        self.app.general.button_press(By.XPATH, self.but_guides_xpath)
-        sleep(1)
-
-    def navigation_button_schedule_press(self):
-        self.app.general.button_press(By.XPATH, self.but_schedule_xpath)
-        sleep(1)
-
-    def navigation_button_requests_press(self):
-        self.app.general.button_press(By.XPATH, self.but_requests_xpath)
-        sleep(1)
-
-    def navigation_button_subscribe_press(self):
-        self.app.general.button_press(By.XPATH, self.but_subscribe_xpath)
-        sleep(1)
 
     def navigation_button_more_press(self):
-        self.app.general.button_press(By.XPATH, self.but_more_xpath)
+        self.app.general.but_press(self.button_more)
         sleep(1)
 
     def screen_live_navigation_is_selected_button(self, title):
-        list_of_buttons = [self.but_live_now_xpath, self.but_projects_xpath, self.but_guides_xpath,
-                           self.but_schedule_xpath, self.but_requests_xpath]
+        buttons = self.app.general.find_elS_and_return(self.nav_buttons)
+        buttons.append(self.app.general.find_el_and_return(self.button_more))
 
-        for x in range(0, len(list_of_buttons)-1):
-            el = self.app.general.find_element_and_return(By.XPATH, list_of_buttons[x])
-            text = el.text
-            if title in text:
-                a = el.value_of_css_property("background-color")
-                if a == 'rgb(251, 251, 251)':
+
+        for but in buttons:
+            a = but.value_of_css_property("background-color")
+            if a == 'rgb(251, 251, 251)':
+                if title in but.text:
                     return True
                 else:
                     return False
+            return False
+
 
     def navigation_screen_is_changed_to(self, title):
-        text = self.app.general.get_text_of_element(By.CSS_SELECTOR, self.main_title_h2_css)
+        text = self.app.general.get_txt_of_el(self.header_title)
         if title.lower() in text.lower():
             return True
         else:
             return False
 
     def navigation_more_sub_elements_are_presented(self, butons):
-        buttons_titles = [x.text for x in self.app.general.find_elementS_and_return(By.CSS_SELECTOR, self.buttons_more_css)]
+        buttons_titles = [x.text for x in self.app.general.find_elS_and_return(self.button_more_items)]
         for b in buttons_titles:
             if b not in butons:
                 return False
