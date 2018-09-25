@@ -32,12 +32,11 @@ class TestClass():
         elts_dct['1sec_top_title'] = self.app.pricing.sec1_title_top_is_presented()
         elts_dct['1sec_2nd_title'] = self.app.pricing.sec1_title_2nd_is_presented()
         elts_dct['1sec_switcher'] = self.app.pricing.sec1_switcher_is_presented()
-        elts_dct['1sec_icons_names_3'] = self.app.pricing.sec1_icon_name_is_presented()
+        elts_dct['1sec_icons_names_4'] = self.app.pricing.sec1_icon_name_is_presented()
         elts_dct['1sec_prices'] = self.app.pricing.sec1_prices_is_presented()
         elts_dct['1sec_bonuses_list'] = self.app.pricing.sec1_bonuses_list_is_presented()
         elts_dct['1sec_button_try'] = self.app.pricing.sec1_button_try_is_presented()
-        for x in elts_dct.values():
-            assert x is True
+        assert all(elts_dct.values())
 
 
     def test_WHEN_pricing_screen_EXPECTED_in_1st_section_switcher_in_annual_state_default_TC3420(self):
