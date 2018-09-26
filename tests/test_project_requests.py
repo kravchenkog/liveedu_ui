@@ -18,14 +18,14 @@ class TestClassPrRequest_not_logged():
     def test_WHEN_requests_button_is_pressed_EXPECTED_project_requests_scr_opens_TC6200(self):
         self.app.home_el.logout_go_home_and_wait()
         self.app.home_el.button_learnlive_click()
-        self.app.live.navigation_button_requests_press()
+        self.app.live.navigation_button_press('Requests')
         assert self.app.request_project.screen_project_requests_is_displayed()
 
     def test_WHEN_requests_screen_opened_EXPECTED_5_sections_presented_TC6205(self):
         elts_dct = {}
-        elts_dct['main_menu_section'] = self.pr.main_menu_section_is_presented()
-        elts_dct['filters_section'] = self.pr.filters_section_is_presented()
-        elts_dct['requests_list_section'] = self.pr.requests_list_section_is_presented()
+        elts_dct['main_menu_section'] = self.pr.main_menu_section_is_displayed()
+        elts_dct['filters_section'] = self.pr.filters_section_is_displayed()
+        elts_dct['requests_list_section'] = self.pr.requests_list_section_is_displayed()
         elts_dct['instruction_section'] = self.pr.instruction_section_is_presented()
         #elts_dct['pagination_section'] = self.app.request_project.pagination_section_is_presented()
         assert all(elts_dct.values())
@@ -37,9 +37,9 @@ class TestClassPrRequest_not_logged():
 
         elts_dct['main_cat_filters'] = self.pr.main_cat_filters_is_presented(main_cat_filters)
         elts_dct['subcategory_filters'] = self.pr.subcategory_filters_is_presented()
-        elts_dct['popularity_latest_sorting'] = self.pr.popularity_latest_sorting_is_presented()
-        elts_dct['difficulty_filter'] = self.pr.difficulty_filter_section_is_presented()
-        elts_dct['language_filter'] = self.pr.language_filter_is_presented()
+        elts_dct['popularity_latest_sorting'] = self.pr.sort_filter_is_presented('Most Popular')
+        elts_dct['difficulty_filter'] = self.pr.sort_filter_is_presented('Difficulty')
+        elts_dct['language_filter'] = self.pr.sort_filter_is_presented('Language')
         for x in elts_dct.values():
             assert x is True
 
@@ -60,7 +60,7 @@ class TestClassPrRequest_not_logged():
     def test_WHEN_subcategory_is_selected_and_x_pressed_EXPECTED_filter_is_reseted_TC6223(self, pr_notlogged):
         filter = self.pr.get_filter_by_text('Choose a category')
         self.pr.select_and_enter_random_subcategory()
-        self.pr.close_x_button_click(filter, self.pr.choose_a_category)
+        self.pr.close_x_button_click(filter, self.pr.sub_cat_filter)
         assert not self.pr.close_x_button_is_presented(self.pr.buttons_in_filter)
 
     def test_WHEN_sorting_by_popularity_is_selected_EXPECTED_items_are_sorted_TC6225(self, pr_notlogged):
@@ -104,7 +104,7 @@ class TestClassPrRequest_not_logged():
         list_api = self.pr.get_list_of_requests_by_api(language='en', difficulty=1)  # english
         assert self.pr.list_of_pr_req_related_to_api_list(list_api)
 
-    def test_WHEN_user_is_not_logged_EXPECTED_elements_in_pr_correct_TC6252(self, pr_student):
+    def test_WHEN_user_is_not_logged_EXPECTED_elements_in_pr_correct_TC6252(self, pr_notlogged):
         elts_dct = {}
         elts_dct['likes_counter'] = self.pr.pr_element_is_displayed_in_each(
             self.pr.likes_button)

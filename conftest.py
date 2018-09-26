@@ -1,8 +1,7 @@
 import pytest
 fixture = None
 from fixture.appManager import AppManager
-from selenium.webdriver.common.by import By
-import time
+
 
 browser = 'firefox'
 
@@ -104,7 +103,7 @@ def pr_notlogged(request):
 
 def smart_start_and_go_to_sign_up(fixture):
 
-    if fixture.signup.screen_signup_is_presented() is not True:
+    if not fixture.signup.screen_signup_is_presented():
         fixture.home_el.logout_go_home_and_wait()
         fixture.signup.button_signup_press_and_wait()
 
@@ -134,12 +133,14 @@ def smart_start_and_go_to_live_screen(fixture):
 def smart_start_and_go_to_project_requests(fixture):
     if not fixture.request_project.screen_project_requests_is_displayed():
         if not fixture.home_el.home_screen_is_presented():
-            fixture.home_el.go_home_and_wait()
+            fixture.home_el.go_home_and_wait(fixture.env.base_url)
         fixture.home_el.button_learnlive_click()
-        fixture.live.navigation_button_requests_press()
+        fixture.live.navigation_button_press('Requests')
         # if fixture.request_project.button_all_is_selected() is True:
 
-    fixture.general.but_press(fixture.request_project.button_all_main)
+    fixture.general.button_press_element(fixture.general.get_el_by_name(
+        name="All", locator=fixture.request_project.buttons_main_filters))
+
     check_filter_difficulty()
     check_filter_sorting()
 

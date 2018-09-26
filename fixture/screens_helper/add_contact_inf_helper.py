@@ -3,33 +3,37 @@ from selenium.webdriver.common.by import By
 
 
 class AddYouContactsInformationHelper():
-    button_next_css = 'button[type="submit"]'
-    hanouts_css = 'input[name="hangouts"]'
-    skype_css = 'input[name="skype"]'
-    title_top_css = 'h2.ygWV5'
+    file_topic = "login-signup-header"
+
+    header_title = {By.CSS_SELECTOR: "h2[class^='{}__title']".format(file_topic)}
+    header_text = {By.CSS_SELECTOR: "p[class^='{}__text']".format(file_topic)}
+    button_next = {By.CSS_SELECTOR:'button[type="submit"]'}
+    hanouts = {By.CSS_SELECTOR: 'input[name="hangouts"]'}
+    skype = {By.CSS_SELECTOR: 'input[name="skype"]'}
+
     title_below_top_css = 'p._16y2Q'
 
     def __init__(self, app):
         self.app = app
 
     def screen_add_contact_inf_is_presented(self):
-        return self.app.general.element_is_presented(By.CSS_SELECTOR, self.skype_css)
+        return self.app.general.el_is_presented(self.skype)
 
     def title_top_is_displayed(self):
-        return self.app.general.element_is_displayed(By.CSS_SELECTOR, self.title_top_css)
+        return self.app.general.el_is_displayed(self.header_title)
 
     def title_below_top_is_displayed(self):
-        return self.app.general.element_is_displayed(By.CSS_SELECTOR, self.title_below_top_css)
+        return self.app.general.el_is_displayed(self.header_text)
 
 
     def field_skype_is_displayed(self):
-        return self.app.general.element_is_displayed(By.CSS_SELECTOR, self.skype_css)
+        return self.app.general.el_is_displayed(self.skype)
 
     def field_google_hang_is_displayed(self):
-        return self.app.general.element_is_displayed(By.CSS_SELECTOR, self.hanouts_css)
+        return self.app.general.el_is_displayed(self.hanouts)
 
     def button_next_is_displayed(self):
-        return self.app.general.element_is_displayed(By.CSS_SELECTOR, self.button_next_css)
+        return self.app.general.el_is_displayed(self.button_next)
 
     def go_to_add_contact_inf_screen(self, user):
         self.app.signup.signup_fillall_press_done_wait_username(user)
@@ -38,9 +42,9 @@ class AddYouContactsInformationHelper():
         self.app.chose_role.button_create_project_tap()
 
     def field_skype_send_key(self, user):
-        self.app.general.send_key(By.CSS_SELECTOR, self.skype_css, user.skype)
+        self.app.general.send_k(self.skype, user.skype)
 
     def button_next_tap(self):
-        self.app.general.button_press(By.CSS_SELECTOR, self.button_next_css)
+        self.app.general.but_press(self.button_next)
 
 

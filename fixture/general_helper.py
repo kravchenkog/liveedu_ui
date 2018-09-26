@@ -46,8 +46,8 @@ class GeneralHelper():
 
     def logout_perform(self):
         if not self.app.login.user_menu_is_opened():
-            self.driver.find_element_by_css_selector('button._1pGNL').click()
-        self.driver.find_element_by_css_selector('button._1ko70').click()
+            self.driver.find_element_by_css_selector("button[class^='user-menu__button']").click()
+        self.driver.find_element_by_css_selector("button[class^='user-menu__link']").click()
         sleep(0.5)
 
     def button_press(self, locator, button):
@@ -72,10 +72,9 @@ class GeneralHelper():
         locator_type = list(element.keys())[arg]
         locator_value = list(element.values())[arg]
         el = self.driver.find_elements(locator_type, locator_value)
-        if len(el) > 0:
+        if el:
             return True
-        else:
-            return False
+        return False
 
     def get_element_by_text(self, text, loc_type, elements):
         els = self.driver.find_elements(loc_type, elements)

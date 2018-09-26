@@ -12,14 +12,86 @@ class ProjectRequestHelper():
     def __init__(self, app):
         self.app = app
         self.general = self.app.general
-        self.file_name1 = "fsfsdfsdf"
-        self.request_project_button = {By.CSS_SELECTOR: 'button.{}_31VgI'.format(self.file_name1)}
-        self.main_menu_section = {By.CSS_SELECTOR: "nav._3iCnJ"}
-        self.filters_section = {By.CSS_SELECTOR: "div._23IZv"}
-        self.requests_list_section = {By.CSS_SELECTOR: "div._305lF"}
-        self.instruction_section = {By.CSS_SELECTOR: "div._31Uzu"}
+        self.file_pr1 = 'modal-triger'
+        self.file_pr2 = 'category-filter'
+        self.file_pr3 = 'requests-list'
+        self.file_pr4 = 'directory-paginator'
+        self.file_pr5 = 'topics-filter'
+        self.file_pr6 = 'sort-filter'
+        self.file_pr7 = 'requests-cta'
+        self.file_pr8 = 'site-navigation'
+        self.file_pr9 = 'directory-filter'
+        self.file_pr10 = 'project-requests'
+        self.file_pr11 = 'requests-card'
+        self.file_pr12 = 'modal-content'
+        self.file_pr13 = 'requests-form'
+        self.file_pr14 = "site-header"
+
+
+        self.request_project_button = {
+            By.CSS_SELECTOR: 'button[class^="{}__modal-button"]'.format(self.file_pr1)}
+        self.sub_cat_filter = {
+            By.CSS_SELECTOR: 'div[class^="{}__categories"]'.format(self.file_pr2)}
+        self.project_request = {
+            By.CSS_SELECTOR: "li[class^='{}__item']".format(self.file_pr3)}
+        self.input_fields = {
+            By.CSS_SELECTOR: "input", By.XPATH: "//input"}
+        self.button_next = {
+            By.CSS_SELECTOR: 'a[class^="{}__next"]'.format(self.file_pr4)}
+        self.buttons_main_filters = {
+            By.CSS_SELECTOR: 'button[class^="{}__button"]'.format(self.file_pr5)}
+        self.main_cat_filters = {
+            By.CSS_SELECTOR: 'ul[class^="{}__topics"]'.format(self.file_pr5)}
+        self.three_right_filters_alternative = {
+            By.CSS_SELECTOR: "div[class^='css-10nd86i {}__select']".format(self.file_pr6)}
+        self.three_right_filters_alternative2 = {
+            By.CSS_SELECTOR: "div[class^='{}__sort']".format(self.file_pr6)}
+        self.three_right_filters = {
+            By.CSS_SELECTOR: "div[class='{}__select']".format(self.file_pr6)}
+        self.instruction_section = {
+            By.CSS_SELECTOR: "div[class^={}__illustration]".format(self.file_pr7)}
+        self.main_menu_section = {
+            By.CSS_SELECTOR: "nav[class^='{}__navigation']".format(self.file_pr8)}
+        self.filters_section = {
+            By.CSS_SELECTOR: "div[class^='{}__container']".format(self.file_pr9)}
+        self.requests_list_section = {
+            By.CSS_SELECTOR: "div[class^='{}__content']".format(self.file_pr10)}
+        self.like_section = {
+            By.CSS_SELECTOR: "div[class^='{}__votes']".format(self.file_pr11)}
+        self.project_request_titles = {
+            By.CSS_SELECTOR: "p[class^='{}__title']".format(self.file_pr11)}
+        self.likes_counter = {
+            By.CSS_SELECTOR: "div[class^='{}__votes']".format(self.file_pr11)}
+        self.likes_button = {
+            By.CSS_SELECTOR: 'button[class^="{}__votes-button"]'.format(self.file_pr11)}
+        self.pr_popup = {
+            By.CSS_SELECTOR: "div[class^='{}__modal']".format(self.file_pr12)}
+        self.close_popup_button = {
+            By.CSS_SELECTOR: "button[class^='{}__modal-close']".format(self.file_pr12)}
+        self.pr_popup_main_title = {
+            By.CSS_SELECTOR: "div[class^='{}__modal-title']".format(self.file_pr12)}
+        self.pr_popup_pname = {
+            By.CSS_SELECTOR: "input[class^='{}__form-input']".format(self.file_pr13)}
+        self.pr_popup_subcategory = {
+            By.CSS_SELECTOR: "div[class^='css-1sontr1']"}
+        self.pr_popup_description = {
+            By.CSS_SELECTOR: "textarea[name='description']"}
+        self.pr_popup_cat_dif_lang = {
+            By.CSS_SELECTOR: "div[class*='requests-form__select']"}
+        self.pr_popup_submit_button = {
+            By.CSS_SELECTOR: "button[class^='{}__form-button']".format(self.file_pr13)}
+        self.create_this_project =  {
+            By.CSS_SELECTOR: 'button[class^="{}__create-button"]'.format(self.file_pr11)}
+        self.main_title = {
+            By.CSS_SELECTOR: 'h2[class^="{}__title"]'.format(self.file_pr14)}
+
+
+
+
+
+
         self.pagination_section = {By.CSS_SELECTOR: "div.NV12W"}
-        self.main_cat_filters = {By.CSS_SELECTOR: "ul._30W_k"}
+
         self.subcategory_filter = {By.CSS_SELECTOR: "div.css-1rtrksz"}
         self.popularity_latest_sorting = {By.CSS_SELECTOR: "div._3octD"}
         self.difficulty_filter = {By.CSS_SELECTOR: 'div.css-1492t68'}
@@ -30,42 +102,39 @@ class ProjectRequestHelper():
                                By.XPATH: "//button[@class='_1owzv']/*"}
         self.request_iconS = {By.CSS_SELECTOR: "p[class='_2CRit _2gT0V'] svg",
                               By.XPATH: "//p[@class='_2CRit _2gT0V']/*"}
-        self.button_next = {By.CSS_SELECTOR: 'a._1fZI7'}
+
         self.filter_all = {By.CSS_SELECTOR: 'div.css-1oxma2j'}
-        self.project_request = {By.CSS_SELECTOR: 'li.PHJ5f'}
+
         self.buttons_in_filter = {By.CSS_SELECTOR: 'div.css-1ep9fjw'}
-        self.button_all_main = {By.CSS_SELECTOR: 'button._1owzv'}
-        self.sub_cat_filter = {By.CSS_SELECTOR: 'div._1QGiN'}
+
+
+
+        self.choose_a_category = {By.CSS_SELECTOR: 'div.css-1ep9fjw'}
+
+
 
         self.last_page_no = {By.CSS_SELECTOR: 'a.rcIUX'}
-        self.input_fields = {By.CSS_SELECTOR: "input", By.XPATH: "//input"}
+
         self.button_all_selected = {By.CSS_SELECTOR: "button[class='_1owzv _1bHrQ']"}
-        self.choose_a_category = {By.CSS_SELECTOR: 'div.zmR57'}
-        self.three_right_filters = {By.CSS_SELECTOR: "div._3rJkv"}
-        self.three_right_filters_alternative = {By.CSS_SELECTOR: "div[class='css-10nd86i _1V4tL']"}
-        self.like_section = {By.CSS_SELECTOR: "div._1qY6Z"}
+
+
+
         self.date_of_proj_request = {By.CSS_SELECTOR: 'p._1kv2c'}
-        self.project_request_titles = {By.CSS_SELECTOR: "p._1iHJC"}
+
         self.difficulty_text = {By.CSS_SELECTOR: "div.css-va7pk8"}
-        self.likes_button = {By.CSS_SELECTOR: 'button._3NVpD'}
-        self.likes_counter = {By.CSS_SELECTOR: "div[class='_1qY6Z _1vYWK']"}
+
         self.description_of_pr = {By.CSS_SELECTOR: "p._3B9_Q"}
         self.language_title = {By.CSS_SELECTOR: "p[class='_1A-k7 _2gT0V']"}
         self.subcategory_icon = {By.CSS_SELECTOR: "p[class='_23KRX _2gT0V']"}
         self.creator_name = {By.CSS_SELECTOR: "span._2-jmN"}
-        self.create_this_project = {By.CSS_SELECTOR: 'button._3hvKT'}
-        self.main_title = {By.CSS_SELECTOR: 'h2._2odmM'}
+
+
         self.make_section_icon = {By.CSS_SELECTOR: 'div._3octD'}
         self.make_section_title = {By.CSS_SELECTOR: 'p._2QuCm'}
         self.make_section_text = {By.CSS_SELECTOR: "p._9YIIf"}
-        self.pr_popup = {By.CSS_SELECTOR: "div._3xr02"}
-        self.close_popup_button = {By.CSS_SELECTOR: 'button._2I1m1'}
-        self.pr_popup_main_title = {By.CSS_SELECTOR: 'h4._1YH3R'}
-        self.pr_popup_pname = {By.CSS_SELECTOR: 'input._2dUs0'}
-        self.pr_popup_subcategory = {By.CSS_SELECTOR: "div[class='css-1sontr1 hRuFE']"}
-        self.pr_popup_description = {By.CSS_SELECTOR: "textarea._2McB1"}
-        self.pr_popup_cat_dif_lang = {By.CSS_SELECTOR: "div[class='css-10nd86i hRuFE']"}
-        self.pr_popup_submit_button = {By.CSS_SELECTOR: "button._30Kmu"}
+
+
+
         self.pr_popup_main_cat_input ={By.CSS_SELECTOR: "input"}
         self.pr_popup_drodowns = {By.CSS_SELECTOR: 'div.css-1oxma2j'}
         self.pr_popup_drodowns2 = {By.CSS_SELECTOR: 'div.css-1rtrksz'}
@@ -77,13 +146,13 @@ class ProjectRequestHelper():
     def screen_project_requests_is_displayed(self):
         return self.general.el_is_presented(self.request_project_button)
 
-    def main_menu_section_is_presented(self):
+    def main_menu_section_is_displayed(self):
         return self.general.el_is_displayed(self.main_menu_section)
 
-    def filters_section_is_presented(self):
+    def filters_section_is_displayed(self):
         return self.general.el_is_displayed(self.filters_section)
 
-    def requests_list_section_is_presented(self):
+    def requests_list_section_is_displayed(self):
         return self.general.el_is_displayed(self.requests_list_section)
 
     def instruction_section_is_presented(self):
@@ -100,7 +169,7 @@ class ProjectRequestHelper():
             all_filters = self.general.find_elS_in_element(filters, self.main_cat_buttonS)
 
             buttons_text = [self.general.get_text_of_element_by_element(x)
-                            for x in self.general.find_elS_in_element(filters, self.main_cat_buttonS)]
+                            for x in self.general.find_elS_in_element(filters, self.buttons_main_filters)]
 
                             # for x in filters.find_elements_by_css_selector(self.main_cat_buttonS_css)]
             for text in buttons_text:
@@ -111,18 +180,21 @@ class ProjectRequestHelper():
         else:
             return False
 
+    def sort_filter_is_presented(self, filter_name):
+        return self.general.element_is_displayed_by_element(
+            self.general.get_el_by_text(text=filter_name, element=self.three_right_filters_alternative))
 
     def subcategory_filters_is_presented(self):
         return self.general.el_is_displayed(self.subcategory_filter)
 
-    def popularity_latest_sorting_is_presented(self):
-        return self.general.el_is_displayed(self.popularity_latest_sorting)
-
-    def difficulty_filter_section_is_presented(self):
-        return self.general.el_is_displayed(self.difficulty_filter)
-
-    def language_filter_is_presented(self):
-        return self.general.el_is_displayed(self.language_filter)
+    # def popularity_latest_sorting_is_presented(self):
+    #     return self.general.el_is_displayed(self.popularity_latest_sorting)
+    #
+    # def difficulty_filter_section_is_presented(self):
+    #     return self.general.el_is_displayed(self.difficulty_filter)
+    #
+    # def language_filter_is_presented(self):
+    #     return self.general.el_is_displayed(self.language_filter)
 
     def list_of_requests_related_to_each_selected_category(self):
         ic_but_list = self.get_button_plus_icon_data_id()
@@ -215,7 +287,7 @@ class ProjectRequestHelper():
 
 
     def select_main_category(self, main_cat):
-        buttons = self.general.find_elS_and_return(self.main_cat_buttonS)
+        buttons = self.general.find_elS_and_return(self.buttons_main_filters)
         but = [x for x in buttons if x.text == main_cat]
         self.general.button_press_element(but[0])
 
@@ -280,14 +352,14 @@ class ProjectRequestHelper():
         if el==1:
 
             self.general.but_press(self.instruction_section)
-
+        self.general.but_press(self.instruction_section)
         button = self.general.find_elS_in_element(
             filter, self.buttons_in_filter)
 
         self.general.button_press_element(button[0])
 
     def select_value_in_right_filters(self, f_no, text):
-        main_el = self.general.find_el_and_return(self.three_right_filters)
+        main_el = self.general.find_el_and_return(self.three_right_filters_alternative2)
         input = self.get_input_field_by_main_element(main_el, f_no)
         filter_to_press = self.get_filter_to_press(f_no)  #0=Popular/New 1=Difficulty 2=Language
         self.enter_value_to_filter_and_tap_enter(filter_to_press, text, input)

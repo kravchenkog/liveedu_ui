@@ -1,5 +1,5 @@
 
-
+import time
 from selenium.webdriver.common.by import By
 
 
@@ -14,11 +14,13 @@ class HomeElements():
         self.file_home2 = 'auth-buttons'
         self.file_home3 = 'guest-header'
         self.file_home4 = 'search-bar'
+        self.file_home5 = 'slider'
 
         self.header_buttons = {By.CSS_SELECTOR: "a[class^='{}__link']".format(self.file_home1)}
         self.auth_buttons = {By.CSS_SELECTOR: "a[class^='{}__link']".format(self.file_home2)}
         self.logo = {By.CSS_SELECTOR: "a[class^='{}__logo']".format(self.file_home3)}
         self.serach_bar = {By.CSS_SELECTOR: "a[class^='{}__search-bar']".format(self.file_home4)}
+        self.signup_section = {By.CSS_SELECTOR: "div[class^='{}__form']".format(self.file_home5)}
 
 
     def get_button_by_name(self, button_name, locator):
@@ -36,10 +38,11 @@ class HomeElements():
         button_pricing = self.get_button_by_name("Pricing", locator=self.header_buttons)
         self.app.general.button_press_element(button_pricing)
 
-    def go_home_and_wait(self):
+    def go_home_and_wait(self, url):
 
-        self.app.general.go_to_url("https://dev.liveedu.tv/")
-        self.app.general.wait_presence_of_element(By.CSS_SELECTOR, "a[class='_2NV3A _38w0o']", 5)
+        self.app.general.go_to_url(url)
+        self.app.general.wait_presence_of_el(self.signup_section, 5)
+        time.sleep(1)
 
     def logout_go_home_and_wait(self):
         if self.app.login.user_is_logged_in():

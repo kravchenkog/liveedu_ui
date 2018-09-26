@@ -10,27 +10,31 @@ class SignUpHelper():
         self.general = self.app.general
         self.home = self.app.home_el
         self.file_signup1 = "signup-step-0"
+        self.file_signup2 = "login-signup-header"
+        self.file_signup3 = "login-signup-social"
+        self.file_signup4 = "signup-form"
+
 
         self.form_left = {By.CSS_SELECTOR: "div[class^='{}__form-left']".format(self.file_signup1)}
+        self.form_right = {By.CSS_SELECTOR: "div[class^='{}__form-right']".format(self.file_signup1)}
         self.field_confirm_password = {By.CSS_SELECTOR: "input[name='passwordConfirm']"}
-        self.section_top_xpath = '//div[@class="_3Mtqt"]'
-        self.section_signup_with_social_xpath = "//div[@class='_27wqJ']"
-        self.section_signup_with_email_xpath = '//div[@class="_1ncq1"]'
-        self.section_lower_title_xpath = '//p[@class="_3ncBY"]'
+        self.signup_form = {By.CSS_SELECTOR: "div[class^='{}__form']".format(self.file_signup1)}
+        self.top_section = {By.CSS_SELECTOR: "div[class^='{}__header']".format(self.file_signup2)}
+        self.lower_title = {By.CSS_SELECTOR: "p[class^='{}__caption']".format(self.file_signup1)}
+        self.social_buttons = {By.CSS_SELECTOR: "div[class^='{}__link']".format(self.file_signup3)}
+        self.title_email = {By.CSS_SELECTOR: "p[class^='{}__form-text']".format(self.file_signup1)}
+        self.field_email = {By.CSS_SELECTOR: "input[name='email']"}
+        self.field_password = {By.CSS_SELECTOR: "input[name='password']"}
+        self.field_password_confirm = {By.CSS_SELECTOR: "input[name='passwordConfirm']"}
+        self.button_start_learning = {By.CSS_SELECTOR: "button[class^='{}__form-button']".format(self.file_signup4)}
+
+
+
         self.title_social_xpath = "//p[contains(text(),'Sign up with social')]"
-        self.button_google_xpath = "//*[contains(@class,'svg-inline--fa fa-google-plus-g fa-w-20')]"
-        self.button_fb_xpath = '//*[@class="svg-inline--fa fa-facebook-f fa-w-9 "]'
-        self.button_vk_xpath = '//*[@class="svg-inline--fa fa-vk fa-w-18 "]'
-        self.button_linkedin_xpath = '//*[@class="svg-inline--fa fa-linkedin-in fa-w-14 "]'
-        self.button_yandex_xpath = "//*[@data-id='bb383ceadcc74bb9b5aafb22a713ae93']"
-        self.button_live_xpath = '//*[@class="svg-inline--fa fa-windows fa-w-14 "]'
-        self.button_github_xpath = '//*[@class="svg-inline--fa fa-github fa-w-16 "]'
-        self.button_twitch_xpath = '//*[@class="svg-inline--fa fa-twitch fa-w-14 "]'
-        self.button_gg_xpath = '//*[@data-id="c5d9b18ffcc6474abb11849bfdee11d1"]'
-        self.title_email_css = "div[class='_1ncq1']"
-        self.field_email_css = "input[name='email']"
-        self.field_password = "input[name='password']"
-        self.button_start_learning_css = 'button[class="_2WGwi"]'
+
+
+
+
 
 
 
@@ -41,89 +45,67 @@ class SignUpHelper():
         self.app.general.wait_presence_of_el(self.form_left, 5)
 
     def screen_signup_is_presented(self):
-        return self.app.general.el_is_presented(self.field_confirm_password)
+        return self.app.general.el_is_presented(self.signup_form)
 
     def screen_signup_is_displayed(self):
         return self.app.general.el_is_displayed(self.field_confirm_password)
 
     def section_top_is_displayed(self):
-        return self.app.general.element_is_displayed(By.XPATH, self.section_top_xpath)
+        return self.app.general.el_is_displayed(self.top_section)
 
     def section_signup_with_social_is_displayed(self):
-        return self.app.general.element_is_displayed(By.XPATH, self.section_signup_with_social_xpath)
+        return self.app.general.el_is_displayed(self.form_left)
 
     def section_sign_up_with_email_is_displayed(self):
-        return self.app.general.element_is_displayed(By.XPATH, self.section_signup_with_email_xpath)
+        return self.app.general.el_is_displayed(self.form_right)
 
     def section_lower_title_is_presented(self):
-        return self.app.general.element_is_displayed(By.XPATH, self.section_lower_title_xpath)
+        return self.app.general.el_is_displayed(self.lower_title)
+
+    def signup_social_button_is_displayed(self, button_name):
+        el = self.app.general.get_el_by_text(text=button_name, element=self.social_buttons)
+        return self.app.general.element_is_displayed_by_element(el)
 
     def title_social_is_displayed(self):
         return self.app.general.element_is_displayed(By.XPATH, self.title_social_xpath)
 
-    def button_google_is_displayed(self):
-        return self.app.general.element_is_displayed(By.XPATH, self.button_google_xpath)
-
-    def button_fb_is_displayed(self):
-        return self.app.general.element_is_displayed(By.XPATH, self.button_fb_xpath)
-
-    def button_vk_is_displayed(self):
-        return self.app.general.element_is_displayed(By.XPATH, self.button_vk_xpath)
-
-    def button_linkedin_is_displayed(self):
-        return self.app.general.element_is_displayed(By.XPATH, self.button_linkedin_xpath)
-
-    def button_yandex_is_displayed(self):
-        return self.app.general.element_is_displayed(By.XPATH, self.button_yandex_xpath)
-
-    def button_live_is_displayed(self):
-        return self.app.general.element_is_displayed(By.XPATH, self.button_live_xpath)
-
-    def button_github_is_displayed(self):
-        return self.app.general.element_is_displayed(By.XPATH, self.button_github_xpath)
-
-    def button_twitch_is_displayed(self):
-        return self.app.general.element_is_displayed(By.XPATH, self.button_twitch_xpath)
-
-    def button_gg_is_displayed(self):
-        return self.app.general.element_is_displayed(By.XPATH, self.button_gg_xpath)
 
     def title_email_is_displayed(self):
-        return self.app.general.element_is_displayed(By.CSS_SELECTOR, self.title_email_css)
+        return self.app.general.el_is_displayed(self.title_email)
 
     def field_email_is_displayed(self):
-        return self.app.general.element_is_displayed(By.CSS_SELECTOR, self.field_email_css)
+        return self.app.general.el_is_displayed(self.field_email)
 
     def field_password_is_displayed(self):
-        return self.app.general.element_is_displayed(By.CSS_SELECTOR, self.field_password)
+        return self.app.general.el_is_displayed(self.field_password)
 
     def field_confirm_password_is_displayed(self):
         return self.app.general.el_is_displayed(self.field_confirm_password)
 
     def button_start_learning_is_displayed(self):
-        return self.app.general.element_is_displayed(By.CSS_SELECTOR, self.button_start_learning_css)
+        return self.app.general.el_is_displayed(self.button_start_learning)
 
     def field_email_send_keys(self, user):
-        self.app.general.send_key(By.CSS_SELECTOR, self.field_email_css, user.email)
+        self.app.general.send_k(self.field_email, user.email)
 
     def field_email_clear(self):
-        self.app.general.field_clear(By.CSS_SELECTOR, self.field_email_css)
+        self.app.general.fld_clear(self.field_email)
 
     def field_password_send_keys(self, user):
-        self.app.general.send_key(By.CSS_SELECTOR, self.field_password, user.password1)
+        self.app.general.send_k(self.field_password, user.password1)
 
     def field_password_clear(self):
-        self.app.general.field_clear(By.CSS_SELECTOR, self.field_password)
+        self.app.general.fld_clear(self.field_password)
 
     def field_confirm_password_send_keys(self, user):
-        field = self.genereal.find_el_and_return(self.field_confirm_password)
-        self.app.general.send_key_by_element(element=field, string=user.password2)
+
+        self.app.general.send_k(element=self.field_confirm_password, string=user.password2)
 
     def field_confirm_password_clear(self):
         self.app.general.fld_clear(self.field_confirm_password)
 
     def button_start_learning_press(self):
-        self.app.general.button_press(By.CSS_SELECTOR, self.button_start_learning_css)
+        self.app.general.but_press(self.button_start_learning)
 
     def fields_clear(self):
         self.field_email_clear()

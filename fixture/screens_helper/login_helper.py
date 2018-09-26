@@ -29,8 +29,8 @@ class LoginHelper():
         self.left_right_titles = {By.CSS_SELECTOR: "p[class^='{}__form-text']".format(self.file_login1)}
         self.social_buttons = {By.CSS_SELECTOR: "button[class^='{}__link']".format(self.file_login5)}
         self.user_menu_button = {By.CSS_SELECTOR: "button[class^='{}__button']".format(self.file_login6)}
-        self.user_menu_role = {By.CSS_SELECTOR: "button[class^='{}__role']".format(self.file_login6)}
-        self.user_menu_section = {By.CSS_SELECTOR: "button[class^='{}__menu-user']".format(self.file_login6)}
+        self.user_menu_role = {By.CSS_SELECTOR: "p[class^='{}__role']".format(self.file_login6)}
+        self.user_menu_section = {By.CSS_SELECTOR: "ul[class^='{}__menu']".format(self.file_login6)}
 
 
 
@@ -74,33 +74,6 @@ class LoginHelper():
     def button_social_is_displayed(self, name):
         el = self.general.get_el_by_name(name=name, locator=self.social_buttons)
         return self.general.element_is_displayed_by_element(el)
-    #
-    # def button_google_is_displayed(self):
-    #     return self.app.general.element_is_displayed(By.CSS_SELECTOR, self.button_google_css)
-    #
-    # def button_fb_is_displayed(self):
-    #     return self.app.general.element_is_displayed(By.CSS_SELECTOR, self.button_fb_css)
-    #
-    # def button_vk_is_displayed(self):
-    #     return self.app.general.element_is_displayed(By.CSS_SELECTOR, self.button_vk_css)
-    #
-    # def button_linkedin_is_displayed(self):
-    #     return self.app.general.element_is_displayed(By.CSS_SELECTOR, self.button_linkedin_css)
-    #
-    # def button_yandex_is_displayed(self):
-    #     return self.app.general.element_is_displayed(By.CSS_SELECTOR, self.button_yandex_css)
-    #
-    # def button_live_is_displayed(self):
-    #     return self.app.general.element_is_displayed(By.CSS_SELECTOR, self.button_live_css)
-    #
-    # def button_github_is_displayed(self):
-    #     return self.app.general.element_is_displayed(By.CSS_SELECTOR, self.button_github_css)
-    #
-    # def button_twitch_is_displayed(self):
-    #     return self.app.general.element_is_displayed(By.CSS_SELECTOR, self.button_twitch_css)
-    #
-    # def button_gg_is_displayed(self):
-    #     return self.app.general.element_is_displayed(By.CSS_SELECTOR, self.button_gg_css)
 
     def title_login_is_displayed(self):
         el = self.general.get_el_by_name('Log in with email', self.left_right_titles)
@@ -149,8 +122,8 @@ class LoginHelper():
         self.app.login.button_enter_press()
 
     def user_is_logged_in(self):
-        if len(self.app.general.find_elementS_and_return(By.CSS_SELECTOR, 'button._1pGNL')) > 0:
-            return self.app.general.element_is_displayed(By.CSS_SELECTOR, 'button._1pGNL')
+        if len(self.app.general.find_elS_and_return(self.user_menu_button)) > 0:
+            return self.app.general.el_is_displayed(self.user_menu_button)
 
         return False
 

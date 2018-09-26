@@ -10,32 +10,35 @@ class UsernameHelper():
 
     def __init__(self, app):
         self.app = app
-        self.button_next = "button[type='submit']"
-        self.field_username = 'input[name="username"]'
-        self.title_top_css = "h2.ygWV5"
-        self.title_lower_css = "p._16y2Q"
+        self.file_username1 = 'signup-username-form'
+        self.file_username2 = 'login-signup-header'
+        self.button_next = {By.CSS_SELECTOR: "button[class^='{}__form-button']".format(self.file_username1)}
+        self.title_top = {By.CSS_SELECTOR: "h2[class^='{}__title']".format(self.file_username2)}
+        self.field_username = {By.CSS_SELECTOR: 'input[name="username"]'}
+        self.title_lower = {By.CSS_SELECTOR: "p[class^='{}__text']".format(self.file_username2)}
+
 
 
     def screen_username_is_presented(self):
-        return self.app.general.element_is_presented(By.CSS_SELECTOR, self.field_username)
+        return self.app.general.el_is_presented(self.field_username)
 
     def screen_username_wait_presenting(self):
-        self.app.general.wait_presence_of_element(By.CSS_SELECTOR, self.field_username, 5)
+        self.app.general.wait_presence_of_el(self.field_username, 5)
 
     def title_top_is_displayed(self):
-        return self.app.general.element_is_displayed(By.CSS_SELECTOR, self.title_top_css)
+        return self.app.general.el_is_displayed(self.title_top)
 
     def title_lower_is_displayed(self):
-        return self.app.general.element_is_displayed(By.CSS_SELECTOR, self.title_lower_css)
+        return self.app.general.el_is_displayed(self.title_lower)
 
     def field_username_is_displayed(self):
-        return self.app.general.element_is_displayed(By.CSS_SELECTOR, self.field_username)
+        return self.app.general.el_is_displayed(self.field_username)
 
     def button_next_is_displayed(self):
-        return self.app.general.element_is_displayed(By.CSS_SELECTOR, self.button_next)
+        return self.app.general.el_is_displayed(self.button_next)
 
     def button_next_click(self):
-        self.app.general.button_press(By.CSS_SELECTOR, self.button_next)
+        self.app.general.but_press(self.button_next)
 
     def field_username_send_keys(self, user):
-        self.app.general.send_key(By.CSS_SELECTOR, self.field_username, user.username)
+        self.app.general.send_k(self.field_username, user.username)
