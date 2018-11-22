@@ -73,7 +73,9 @@ class LoginHelper():
 
     def button_social_is_displayed(self, name):
         el = self.general.get_el_by_name(name=name, locator=self.social_buttons)
-        return self.general.element_is_displayed_by_element(el)
+        if el:
+            return self.general.element_is_displayed_by_element(el)
+        else: return el
 
     def title_login_is_displayed(self):
         el = self.general.get_el_by_name('Log in with email', self.left_right_titles)
@@ -109,9 +111,10 @@ class LoginHelper():
     def register_new_user_and_go_to_login_screen(self, app):
         self.app.string.get_random_userdata(self.app.user)
         self.app.home_el.logout_go_home_and_wait()
-        self.app.signup.button_signup_press_and_wait()
-        self.app.signup.complete_registration(self.app.user)
-        self.app.api.email_confirmation(app=self.app, user=self.app.user)
+        self.app.cont_inf.go_to_add_contact_inf_screen(self.app.user)
+        self.app.cont_inf.field_skype_send_key(self.app.user)
+        self.app.cont_inf.button_next_tap()
+        self.app.api.email_confirmation(self.app, self.app.user)
         self.app.home_el.logout_go_home_and_wait()
         self.button_login_press_and_wait()
 

@@ -4,10 +4,12 @@ from selenium.webdriver.common.by import By
 
 class AddYouContactsInformationHelper():
     file_topic = "login-signup-header"
+    file_topic2 = 'signup-contact-form'
 
     header_title = {By.CSS_SELECTOR: "h2[class^='{}__title']".format(file_topic)}
     header_text = {By.CSS_SELECTOR: "p[class^='{}__text']".format(file_topic)}
-    button_next = {By.CSS_SELECTOR:'button[type="submit"]'}
+
+    button_next = {By.CSS_SELECTOR:'button[class^={}__form-button]'.format(file_topic2)}
     hanouts = {By.CSS_SELECTOR: 'input[name="hangouts"]'}
     skype = {By.CSS_SELECTOR: 'input[name="skype"]'}
 

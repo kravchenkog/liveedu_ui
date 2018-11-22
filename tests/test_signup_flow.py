@@ -22,13 +22,12 @@ class TestClass():
         elts_dct['title_soc'] = self.app.signup.title_social_is_displayed()
         elts_dct['google_soc'] = self.app.signup.signup_social_button_is_displayed('google')
         elts_dct['fb_social'] = self.app.signup.signup_social_button_is_displayed('Facebook')
-        elts_dct['vk_social'] = self.app.signup.signup_social_button_is_displayed('vk')
-        elts_dct['linkedin_soc'] = self.app.signup.signup_social_button_is_displayed('linkedin')
-        elts_dct['yandex_soc'] = self.app.signup.signup_social_button_is_displayed('yahoo')
+        #elts_dct['linkedin_soc'] = self.app.signup.signup_social_button_is_displayed('linkedin')
+       #elts_dct['yandex_soc'] = self.app.signup.signup_social_button_is_displayed('yahoo')
         elts_dct['live_soc'] = self.app.signup.signup_social_button_is_displayed('live')
         elts_dct['github_soc'] = self.app.signup.signup_social_button_is_displayed('github')
         elts_dct['twitch_soc'] = self.app.signup.signup_social_button_is_displayed('twitch')
-        elts_dct['qq_soc'] = self.app.signup.signup_social_button_is_displayed('qq')
+        # elts_dct['qq_soc'] = self.app.signup.signup_social_button_is_displayed('qq')
         for x in elts_dct.values():
             assert x is True
 

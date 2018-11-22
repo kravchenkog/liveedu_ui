@@ -128,13 +128,13 @@ def smart_start_and_go_to_pricing(fixture):
 def smart_start_and_go_to_live_screen(fixture):
     if not fixture.live.screen_live_is_presented():
         fixture.home_el.logout_go_home_and_wait()
-        fixture.home_el.button_learnlive_click()
+        fixture.home_el.button_learnondemand_click()
 
 def smart_start_and_go_to_project_requests(fixture):
     if not fixture.request_project.screen_project_requests_is_displayed():
         if not fixture.home_el.home_screen_is_presented():
             fixture.home_el.go_home_and_wait(fixture.env.base_url)
-        fixture.home_el.button_learnlive_click()
+        fixture.home_el.button_learnondemand_click()
         fixture.live.navigation_button_press('Requests')
         # if fixture.request_project.button_all_is_selected() is True:
 

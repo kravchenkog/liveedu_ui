@@ -13,8 +13,8 @@ class TestClass():
     def test_WHEN_home_screen_open_AND_not_logged_EXPECTED_logo_button_is_presented_TC1000(self):
         assert self.app.home_el.logo_is_presented()
 
-    def test_WHEN_home_screen_open_AND_not_logged_EXPECTED_learnlive_button_is_presented_TC1000(self):
-        assert self.app.home_el.button_learnlive_is_displayed()
+    # def test_WHEN_home_screen_open_AND_not_logged_EXPECTED_learnlive_button_is_presented_TC1000(self):
+    #     assert self.app.home_el.button_learnlive_is_displayed()
 
     def test_WHEN_home_screen_open_AND_not_logged_EXPECTED_learnondemand_button_is_presented_TC1000(self):
         assert self.app.home_el.button_learnondemand_is_displayed()

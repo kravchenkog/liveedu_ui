@@ -27,6 +27,7 @@ class SignUpHelper():
         self.field_password = {By.CSS_SELECTOR: "input[name='password']"}
         self.field_password_confirm = {By.CSS_SELECTOR: "input[name='passwordConfirm']"}
         self.button_start_learning = {By.CSS_SELECTOR: "button[class^='{}__form-button']".format(self.file_signup4)}
+        self.signup_titles = {By.CSS_SELECTOR: f"p[class^='{self.file_signup1}__form-text']"}
 
 
 
@@ -67,7 +68,8 @@ class SignUpHelper():
         return self.app.general.element_is_displayed_by_element(el)
 
     def title_social_is_displayed(self):
-        return self.app.general.element_is_displayed(By.XPATH, self.title_social_xpath)
+        title = self.app.general.get_el_by_text(element=self.signup_titles, text="Sign up with social")
+        return self.app.general.element_is_displayed_by_element(title)
 
 
     def title_email_is_displayed(self):

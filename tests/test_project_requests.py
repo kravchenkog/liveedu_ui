@@ -17,7 +17,7 @@ class TestClassPrRequest_not_logged():
 
     def test_WHEN_requests_button_is_pressed_EXPECTED_project_requests_scr_opens_TC6200(self):
         self.app.home_el.logout_go_home_and_wait()
-        self.app.home_el.button_learnlive_click()
+        self.app.home_el.button_learnondemand_click()
         self.app.live.navigation_button_press('Requests')
         assert self.app.request_project.screen_project_requests_is_displayed()
 

@@ -29,24 +29,26 @@ from fixture.screens_helper.project_request_helper import ProjectRequestHelper
 
 class AppManager:
     def __init__(self, browser):
-        self.env = Environment(1)  # dev
+        self.env = Environment(2)  # stg
 
 
 
         if browser == 'firefox':
 
-            self.profile = webdriver.FirefoxProfile()
-            self.profile.set_preference('network.http.phishy-userpass-length', 255)
+            # self.profile = webdriver.PhantomJS()
+            # self.profile.set_preference('network.http.phishy-userpass-length', 255)
             self.driver = webdriver.Firefox()
             self.driver.maximize_window()
-            # self.driver.get("https://livecodingtv:csEAMHPfoetWUyY3hxwNPXuM@dev.liveedu.tv/")
+           # self.driver.get("https://livecodingtv:csEAMHPfoetWUyY3hxwNPXuM@dev.liveedu.tv/")
+
             self.driver.get(self.env.base_url)
-            wait(self.driver, 20).until(EC.alert_is_present())
+            wait(self.driver, 5).until(EC.alert_is_present())
             alert = self.driver.switch_to.alert
             alert.send_keys('livecodingtv' + Keys.TAB + 'csEAMHPfoetWUyY3hxwNPXuM')
             alert.accept()
             self.general = GeneralHelper(self)
             self.home_el = HomeElements(self)
+
             self.general.wait_presence_of_el(self.home_el.logo, 5)
 
 

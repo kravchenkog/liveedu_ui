@@ -84,6 +84,8 @@ class ProjectRequestHelper():
             By.CSS_SELECTOR: 'button[class^="{}__create-button"]'.format(self.file_pr11)}
         self.main_title = {
             By.CSS_SELECTOR: 'h2[class^="{}__title"]'.format(self.file_pr14)}
+        self.last_page_no = {
+            By.CSS_SELECTOR: 'a[class^="{}__link"]'.format(self.file_pr4)}
 
 
 
@@ -113,7 +115,7 @@ class ProjectRequestHelper():
 
 
 
-        self.last_page_no = {By.CSS_SELECTOR: 'a.rcIUX'}
+
 
         self.button_all_selected = {By.CSS_SELECTOR: "button[class='_1owzv _1bHrQ']"}
 

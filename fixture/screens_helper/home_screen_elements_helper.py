@@ -34,6 +34,10 @@ class HomeElements():
         button = self.get_button_by_name("Learn Live!", locator=self.header_buttons)
         self.app.general.button_press_element(button)
 
+    def button_learnondemand_click(self):
+        button = self.get_button_by_name("Learn on Demand", locator=self.header_buttons)
+        self.app.general.button_press_element(button)
+
     def button_pricing_click(self):
         button_pricing = self.get_button_by_name("Pricing", locator=self.header_buttons)
         self.app.general.button_press_element(button_pricing)
@@ -42,12 +46,14 @@ class HomeElements():
 
         self.app.general.go_to_url(url)
         self.app.general.wait_presence_of_el(self.signup_section, 5)
+        self.app.general.wait_presence_of_elS(self.header_buttons, 5)
+
         time.sleep(1)
 
     def logout_go_home_and_wait(self):
         if self.app.login.user_is_logged_in():
             self.app.general.logout_perform()
-        self.app.general.go_to_url("https://dev.liveedu.tv/")
+        self.app.general.go_to_url(self.app.env.base_url)
         self.app.general.wait_presence_of_el(element=self.logo, time=5)
 
     def logo_is_presented(self):

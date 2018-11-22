@@ -12,7 +12,7 @@ class PricingHelper():
     def __init__(self, app):
         self.app = app
         self.file_pricing1 = 'slider'
-        self.file_pricing2 = 'categories'
+        self.file_pricing2 = 'topics'
         self.file_pricing3 = "features"
         self.file_pricing4 = "quality-control"
         self.file_pricing5 = 'benefits'
@@ -28,7 +28,7 @@ class PricingHelper():
         self.slider_section = {
             By.CSS_SELECTOR: "section[class^='{}__slider']".format(self.file_pricing1)}
         self.categories_section = {
-            By.CSS_SELECTOR: "section[class^='{}__categories']".format(self.file_pricing2)}
+            By.CSS_SELECTOR: "section[class^='{}__topics']".format(self.file_pricing2)}
         self.features_section = {
             By.CSS_SELECTOR: "section[class^='{}__features']".format(self.file_pricing3)}
         self.quality_control_section = {
@@ -99,6 +99,7 @@ class PricingHelper():
             By.CSS_SELECTOR: "ul[class^='{}__list']".format(self.file_pricing8)}
         self.sec9_title = {
             By.CSS_SELECTOR: "h2[class^='{}__title']".format(self.file_pricing9)}
+        self.expended_faq = {By.CSS_SELECTOR: 'div[aria-expanded="true"]'}
 
     # item-icon-svg
     def screen_pricing_is_presented(self):
@@ -340,5 +341,5 @@ class PricingHelper():
         self.app.general.button_press_element(random_faq)
 
     def button_faq_is_expanded(self):
-        return self.app.general.element_is_displayed(By.CSS_SELECTOR, 'div[aria-expanded="true"]')
+        return self.app.general.el_is_displayed(self.expended_faq)
 

@@ -17,12 +17,12 @@ class TestClass():
     def test_WHEN_live_screen_open_EXPECTED_8buttons_are_presented_in_navigation_TC3610(self):
         elts_dct = {}
         elts_dct['logo'] = self.app.live.navigation_button_logo_is_displayed()
-        elts_dct['live_now'] = self.app.live.navigation_button_is_displayed('Live Now')
+        #elts_dct['live_now'] = self.app.live.navigation_button_is_displayed('Live Now')
         elts_dct['projects'] = self.app.live.navigation_button_is_displayed('Projects')
         elts_dct['guides'] = self.app.live.navigation_button_is_displayed('Guides')
         elts_dct['schedule'] = self.app.live.navigation_button_is_displayed('Schedule')
         elts_dct['requests'] = self.app.live.navigation_button_is_displayed('Requests')
-        elts_dct['subscribe'] = self.app.live.navigation_button_is_displayed('Subscribe')
+        #elts_dct['subscribe'] = self.app.live.navigation_button_is_displayed('Subscribe')
         elts_dct['more'] = self.app.live.navigation_button_is_displayed('More')
         for x in elts_dct.values(): assert x
 
@@ -30,12 +30,12 @@ class TestClass():
         self.app.live.navigation_button_logo_press()
         assert self.app.home_el.home_screen_is_presented()
 
-    def test_WHEN_live_now_pressed_EXPECTED_live_screen_opened_TC3631(self):
-        self.app.live.navigation_button_press("Live Now")
-        assert self.app.live.screen_live_is_presented()
+    # def test_WHEN_live_now_pressed_EXPECTED_live_screen_opened_TC3631(self):
+    #     self.app.live.navigation_button_press("Live Now")
+    #     assert self.app.live.screen_live_is_presented()
 
-    def test_WHEN_live_screen_EXPECTED_live_now_button_selected_by_default_TC3630(self):
-        assert self.app.live.screen_live_navigation_is_selected_button('Live Now')
+    # def test_WHEN_live_screen_EXPECTED_live_now_button_selected_by_default_TC3630(self):
+    #     assert self.app.live.screen_live_navigation_is_selected_button('Live Now')
 
     def test_WHEN_live_screen_AND_projects_but_pressed_EXPECTED_project_scr_opened_TC3640(self):
         self.app.live.navigation_button_press("Projects")
@@ -53,14 +53,13 @@ class TestClass():
         self.app.live.navigation_button_press('Requests')
         assert self.app.live.navigation_screen_is_changed_to('Requests')
 
-    def test_WHEN_live_screen_AND_subscribe_but_pressed_EXPECTED_pricing_scr_opened_TC3680(self):
-        self.app.live.navigation_button_press('Subscribe')
-        assert self.app.pricing.screen_pricing_is_presented()
+    # def test_WHEN_live_screen_AND_subscribe_but_pressed_EXPECTED_pricing_scr_opened_TC3680(self):
+    #     self.app.live.navigation_button_press('Subscribe')
+    #     assert self.app.pricing.screen_pricing_is_presented()
 
     def test_WHEN_live_screen_AND_more_but_pressed_EXPECTED_12buttons_is_presented_TC3690(self):
         list_of_buttons = ['How it Works', 'Project creator guide', 'Make money', 'Tokens', 'API',
-                           'Pastebin', 'About us', 'Blog', 'Press', 'Support', 'Partnership',
-                           'Contact us']
+                           'Pastebin', 'About us', 'Blog', 'Press', 'Support']
 
         self.app.live.navigation_button_more_press()
         assert self.app.live.navigation_more_sub_elements_are_presented(list_of_buttons)

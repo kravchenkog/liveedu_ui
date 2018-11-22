@@ -20,13 +20,13 @@ class TestClass():
         elts_dct['title_soc'] = self.app.login.title_social_is_displayed()
         elts_dct['google_soc'] = self.app.login.button_social_is_displayed('Google +')
         elts_dct['fb_social'] = self.app.login.button_social_is_displayed('Facebook')
-        elts_dct['vk_social'] = self.app.login.button_social_is_displayed('VK')
-        elts_dct['linkedin_soc'] = self.app.login.button_social_is_displayed('Linkedin')
-        elts_dct['yandex_soc'] = self.app.login.button_social_is_displayed('Yahoo')
+
+        #elts_dct['linkedin_soc'] = self.app.login.button_social_is_displayed('Linkedin')
+
         elts_dct['live_soc'] = self.app.login.button_social_is_displayed('Live')
         elts_dct['github_soc'] = self.app.login.button_social_is_displayed('GitHub')
         elts_dct['twitch_soc'] = self.app.login.button_social_is_displayed('Twitch')
-        elts_dct['qq_soc'] = self.app.login.button_social_is_displayed('QQ')
+
         for x in elts_dct.values():
             assert x is True
 

@@ -10,7 +10,11 @@ class Environment:
                    {'Content-Type': 'application/json',
                     'Authorization': 'Basic bGl2ZWNvZGluZ3R2OmNzRUFNSFBmb2V0V1V5WTNoeHdOUFh1TQ=='}}
 
-        stg = {'baseurl': 'http://stg.liveedu.tv'}
+        stg = {'params': '', 'baseurl': 'https://staging.liveedu.tv',
+               'headers':
+                   {'Content-Type': 'application/json',
+                    'Authorization': 'Basic bGl2ZWNvZGluZ3R2OmNzRUFNSFBmb2V0V1V5WTNoeHdOUFh1TQ=='}}
+
         prod = {'baseurl': 'http://liveedu.tv'}
         cookies = {'nginx_auth': '23942c07f8f8dc87baf2a2afa32e2af4'}
         if env_type == 1:
@@ -20,7 +24,10 @@ class Environment:
             self.cookies = cookies
 
         if env_type == 2:
-            self.base_url = prod['baseurl']
+            self.base_url = copy.deepcopy(stg['baseurl'])
+            self.headers = copy.deepcopy(stg['headers'])
+            self.params = params
+            self.cookies = cookies
 
 def set_env_values(environment):
     env = Environment

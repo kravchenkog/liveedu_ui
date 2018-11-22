@@ -8,13 +8,6 @@ class GeneralHelper():
         self.app = app
         self.driver = app.driver
 
-    def element_is_displayed(self, locator, element):
-        el = self.driver.find_element(locator, element)
-        if el.is_displayed():
-            return True
-        else:
-            return False
-
 
     def el_is_displayed(self, element, arg=0):
         locator_type = list(element.keys())[arg]
@@ -86,7 +79,19 @@ class GeneralHelper():
         locator_type = list(element.keys())[arg]
         locator_value = list(element.values())[arg]
         els = self.driver.find_elements(locator_type, locator_value)
-        el = [x for x in els if text in x.text.lower()][0]
+        counter = 0
+        try:
+
+            el = [x for x in els if text in x.text.lower()][0]
+
+        except IndexError:
+            el = False
+            print("!!!!!!!!!!!____index error___!!!!!!!!!!!!!!")
+            # sleep(0.5)
+            # if counter < 6:
+            #     counter += 1
+            #     return self.get_el_by_text(text, element, arg=arg)
+
         return el
 
     def find_elements_in_element(self, main_el, locator, element):
@@ -114,6 +119,12 @@ class GeneralHelper():
         locator_value = list(element.values())[arg]
         WebDriverWait(self.driver, time).until(
             EC.presence_of_element_located((locator_type, locator_value)))
+
+    def wait_presence_of_elS(self, element, time, arg=0):
+        locator_type = list(element.keys())[arg]
+        locator_value = list(element.values())[arg]
+        WebDriverWait(self.driver, time).until(
+            EC.presence_of_all_elements_located((locator_type, locator_value)))
 
     def send_key(self, locator, element, string):
         self.driver.find_element(locator, element).send_keys(string)
